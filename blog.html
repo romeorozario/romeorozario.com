@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Romeo Nicholas Rozario</title>
+<link href="https://fonts.googleapis.com/css2?family=Unna:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dark:#07090d;--dark2:#0c1018;--dark3:#111620;
+  --orange:#e8650a;--orange2:#f5730f;
+  --ink:#0a0f18;--light:#f5f0e8;--light2:#ede7d9;--cream:#faf6f0;
+  --serif:'Unna',serif;--sans:'DM Sans',sans-serif;--mono:'Space Mono',monospace;
+  --nav-h:72px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:17px;background:var(--dark);color:#fff;overflow-x:hidden}
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3rem;
+  background:rgba(12,16,24,0.98);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(232,101,10,0.2);
+  box-shadow:0 2px 24px rgba(0,0,0,0.4);
+}
+.nav-logo{font-family:var(--serif);font-size:1.15rem;font-weight:700;color:#fff;text-decoration:none}
+.nav-logo span{color:var(--orange)}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.65);text-decoration:none;font-size:0.82rem;letter-spacing:0.09em;text-transform:uppercase;font-weight:500;transition:color 0.2s}
+.nav-links a:hover{color:var(--orange)}
+.nav-dropdown{position:relative}
+.nav-dropdown-toggle{cursor:pointer}
+.nav-dropdown-menu{
+  display:none;position:absolute;top:100%;padding-top:8px;left:50%;
+  transform:translateX(-50%);
+  background:rgba(12,16,24,0.99);
+  border:1px solid rgba(232,101,10,0.2);
+  min-width:220px;list-style:none;
+  box-shadow:0 8px 32px rgba(0,0,0,0.4);z-index:300;
+}
+.nav-dropdown-menu li{background:rgba(12,16,24,0.99)}
+.nav-dropdown-menu li:first-child{border-top:1px solid rgba(232,101,10,0.2)}
+.nav-dropdown-menu li:last-child{box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+.nav-dropdown-menu li a{
+  display:block;padding:13px 20px;font-size:0.78rem;letter-spacing:0.08em;
+  color:rgba(255,255,255,0.6);text-transform:uppercase;
+  border-bottom:1px solid rgba(232,101,10,0.08);transition:all 0.2s;
+}
+.nav-dropdown-menu li:last-child a{border-bottom:none}
+.nav-dropdown-menu li a:hover{color:#fff;background:rgba(232,101,10,0.1);padding-left:24px}
+.nav-dropdown:hover .nav-dropdown-menu{display:block}
+.nav-cv{
+  font-family:var(--mono);font-size:0.68rem;letter-spacing:0.07em;text-transform:uppercase;
+  border:1.5px solid var(--orange);color:#fff;padding:9px 18px;text-decoration:none;border-radius:2px;
+  display:flex;align-items:center;gap:7px;transition:all 0.2s;
+}
+.nav-cv:hover{background:var(--orange)}
+
+/* PAGE */
+.page-hero{
+  min-height:50vh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:6rem 4rem 4rem;padding-top:calc(var(--nav-h) + 4rem);
+  background:var(--dark2);position:relative;overflow:hidden;
+  border-bottom:1px solid rgba(232,101,10,0.12);
+}
+.page-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 80% 20%,rgba(232,101,10,0.08) 0%,transparent 55%);
+  pointer-events:none;
+}
+.page-eyebrow{
+  font-family:var(--mono);font-size:0.7rem;letter-spacing:0.24em;color:var(--orange);
+  text-transform:uppercase;margin-bottom:1.5rem;font-weight:700;
+  display:flex;align-items:center;gap:14px;position:relative;z-index:1;
+}
+.page-eyebrow::before{content:'';width:24px;height:2px;background:var(--orange)}
+.page-title{
+  font-family:var(--serif);font-size:clamp(3rem,5vw,5rem);font-weight:700;
+  line-height:1.0;color:#fff;position:relative;z-index:1;margin-bottom:1rem;
+}
+.page-title span{color:var(--orange)}
+.page-sub{
+  font-family:var(--serif);font-style:italic;font-size:1.1rem;
+  color:rgba(255,255,255,0.45);position:relative;z-index:1;max-width:600px;line-height:1.6;
+}
+
+/* COMING SOON */
+.coming-soon{
+  padding:8rem 4rem;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;min-height:50vh;
+  background:var(--dark);
+}
+.cs-icon{
+  width:80px;height:80px;border:2px solid rgba(232,101,10,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2rem;margin-bottom:2.5rem;color:var(--orange);
+  border-radius:2px;
+}
+.cs-title{
+  font-family:var(--serif);font-size:2.2rem;font-weight:700;
+  color:#fff;margin-bottom:1rem;
+}
+.cs-title span{color:var(--orange)}
+.cs-body{
+  font-size:1rem;color:rgba(255,255,255,0.45);line-height:1.85;
+  max-width:520px;margin-bottom:2.5rem;font-weight:300;
+}
+.cs-tags{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:3rem}
+.cs-tag{
+  font-family:var(--mono);font-size:0.7rem;letter-spacing:0.05em;
+  padding:8px 16px;
+  background:rgba(232,101,10,0.08);
+  border:1.5px solid rgba(232,101,10,0.3);
+  color:rgba(255,255,255,0.6);
+}
+.back-btn{
+  font-family:var(--mono);font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;
+  background:var(--orange);color:#fff;padding:14px 28px;text-decoration:none;
+  display:inline-flex;align-items:center;gap:10px;font-weight:700;
+  transition:background 0.2s;
+}
+.back-btn:hover{background:var(--orange2)}
+
+footer{
+  background:var(--dark);padding:2rem 3rem;
+  border-top:1px solid rgba(232,101,10,0.1);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.footer-name{font-family:var(--serif);font-size:0.95rem;font-weight:700;color:rgba(255,255,255,0.22)}
+.footer-copy{font-family:var(--mono);font-size:0.62rem;color:rgba(255,255,255,0.16);letter-spacing:0.08em}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Romeo Nicholas <span>Rozario</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#marketing">Work</a></li>
+    <li><a href="index.html#music">Music</a></li>
+    <li><a href="index.html#albums">Gallery</a></li>
+    <li class="nav-dropdown">
+      <a href="#" class="nav-dropdown-toggle">Resources &#9662;</a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="education.html">Education &amp; Certifications</a></li>
+      </ul>
+    </li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a href="index.html" class="nav-cv">&#8592; Back to Site</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-eyebrow">Blog</div>
+  <h1 class="page-title">Thoughts &amp; <span>Takes.</span></h1>
+  <p class="page-sub">On marketing, music, building things, and everything in between.</p>
+</div>
+
+<div class="coming-soon">
+  <div class="cs-icon">&#9998;</div>
+  <h2 class="cs-title">Writing is <span>coming.</span></h2>
+  <p class="cs-body">This space is reserved for my personal writing. Not the blogs I've written for brands, but the ones I write for myself. On strategy, creativity, music, and the overlap between all three.</p>
+  <div class="cs-tags">
+    <span class="cs-tag">Marketing Strategy</span>
+    <span class="cs-tag">SEO & AI Search</span>
+    <span class="cs-tag">SaaS Growth</span>
+    <span class="cs-tag">Music & Creativity</span>
+    <span class="cs-tag">Content & Storytelling</span>
+  </div>
+  <a href="index.html" class="back-btn">&#8592; Back to Portfolio</a>
+</div>
+
+<footer>
+  <div class="footer-name">Romeo Nicholas Rozario</div>
+  <div class="footer-copy">&copy; 2026 &mdash; romeorozario.com</div>
+</footer>
+
+</body>
+</html>
