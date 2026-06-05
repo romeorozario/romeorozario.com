@@ -183,24 +183,31 @@ nav{
 
 /* CERT LIGHTBOX */
 .cert-lightbox{
-  display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);
   z-index:9999;align-items:center;justify-content:center;padding:2rem;
 }
 .cert-lightbox.active{display:flex}
+.cert-lightbox-inner{
+  position:relative;background:#fff;padding:1rem;
+  max-width:680px;width:90vw;box-shadow:0 8px 40px rgba(0,0,0,0.4);
+}
 .cert-lightbox-img{
-  max-width:90vw;max-height:88vh;object-fit:contain;
-  border:2px solid rgba(232,101,10,0.4);
+  width:100%;height:auto;display:block;
 }
 .cert-lightbox-close{
-  position:fixed;top:1.2rem;right:1.5rem;
+  position:absolute;top:-14px;right:-14px;
   background:var(--orange);color:#fff;border:none;
-  width:36px;height:36px;font-size:1.2rem;cursor:pointer;
+  width:28px;height:28px;font-size:1rem;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
-  border-radius:2px;font-weight:700;
+  border-radius:50%;font-weight:700;line-height:1;
 }
 .cert-item.has-thumb{cursor:pointer}
-.cert-thumb{transition:opacity 0.2s}
-.cert-item.has-thumb:hover .cert-thumb{opacity:0.8}
+.cert-thumb{
+  width:56px;height:40px;object-fit:cover;object-position:top left;
+  border:1px solid rgba(232,101,10,0.25);flex-shrink:0;
+  transition:opacity 0.2s;
+}
+.cert-item.has-thumb:hover .cert-thumb{opacity:0.75}
 .cert-issuer{
   font-family:var(--mono);font-size:0.64rem;letter-spacing:0.1em;
   color:var(--orange);text-transform:uppercase;font-weight:700;
@@ -485,8 +492,10 @@ function toggleMobileNav(btn){btn.classList.toggle('open');document.querySelecto
 <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
 
 <div class="cert-lightbox" id="certLightbox" onclick="closeCertLightbox(event)">
-  <button class="cert-lightbox-close" onclick="document.getElementById('certLightbox').classList.remove('active')">&times;</button>
-  <img class="cert-lightbox-img" id="certLightboxImg" src="" alt="Certificate">
+  <div class="cert-lightbox-inner">
+    <button class="cert-lightbox-close" onclick="document.getElementById('certLightbox').classList.remove('active');document.body.style.overflow=''">&times;</button>
+    <img class="cert-lightbox-img" id="certLightboxImg" src="" alt="Certificate">
+  </div>
 </div>
 
 </body>
