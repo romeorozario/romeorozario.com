@@ -141,12 +141,16 @@ nav{
 .back-btn:hover{background:var(--orange2)}
 
 footer{
-  background:var(--dark);padding:2rem 3rem;
-  border-top:1px solid rgba(232,101,10,0.1);
+  background:rgba(12,16,24,0.98);
+  padding:2rem 3rem;
+  border-top:2px solid rgba(232,101,10,0.4);
+  box-shadow:0 -2px 24px rgba(0,0,0,0.4);
   display:flex;justify-content:space-between;align-items:center;
+  gap:2rem;flex-wrap:wrap;
 }
-.footer-name{font-family:var(--serif);font-size:0.95rem;font-weight:700;color:rgba(255,255,255,0.22)}
-.footer-copy{font-family:var(--mono);font-size:0.62rem;color:rgba(255,255,255,0.16);letter-spacing:0.08em}
+.footer-left{display:flex;flex-direction:column;gap:0.4rem}
+.footer-name{font-family:var(--serif);font-size:1rem;font-weight:700;color:#fff}
+.footer-copy{font-family:var(--mono);font-size:0.62rem;color:rgba(255,255,255,0.4);letter-spacing:0.08em}
 
 @media(max-width:900px){
   nav{padding:0 1.5rem}
@@ -212,12 +216,16 @@ footer{
 </div>
 
 <footer>
-  <div class="footer-name">Romeo Nicholas Rozario</div>
-  <div class="footer-copy">&copy; 2026 &mdash; romeorozario.com</div>
+  <div class="footer-left">
+    <div class="footer-name">Romeo Nicholas Rozario</div>
+    <div class="footer-copy">&copy; 2026 &mdash; romeorozario.com</div>
+  </div>
+  <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="HORIZONTAL" data-vanity="romeo-rozario" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://bd.linkedin.com/in/romeo-rozario?trk=profile-badge">Romeo Rozario</a></div>
 </footer>
 
 <script>
 function toggleMobileNav(btn){btn.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('mobile-open')}
 </script>
+<script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
 </body>
 </html>
