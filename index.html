@@ -606,7 +606,7 @@ a.proof-card:hover .proof-card-overlay{background:linear-gradient(to top,rgba(7,
   <div class="proof-section">
     <div class="proof-label">Proof of Work</div>
     <div class="proof-scroll-wrap">
-      <button class="proof-arrow proof-arrow-left" onclick="scrollProof(-1)">&#8592;</button>
+      <button class="proof-arrow proof-arrow-left" id="proofArrowLeft" type="button" aria-label="Scroll left">&#8592;</button>
       <div class="proof-track" id="proofTrack">
         <!-- SERPELY CARD -->
         <a href="https://serpely.com" target="_blank" rel="noopener" class="proof-card">
@@ -712,7 +712,7 @@ a.proof-card:hover .proof-card-overlay{background:linear-gradient(to top,rgba(7,
         </div>
 
       </div>
-      <button class="proof-arrow proof-arrow-right" onclick="scrollProof(1)">&#8594;</button>
+      <button class="proof-arrow proof-arrow-right" id="proofArrowRight" type="button" aria-label="Scroll right">&#8594;</button>
     </div>
   </div>
 
@@ -955,12 +955,47 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
   });
 });
-function scrollProof(dir) {
+(function() {
   const track = document.getElementById('proofTrack');
-  const card = track.querySelector('.proof-card');
-  const cardW = card.offsetWidth + 20;
-  track.scrollBy({left: dir * cardW, behavior: 'smooth'});
-}
+  if (!track) return;
+
+  function cardStep() {
+    const card = track.querySelector('.proof-card');
+    return (card ? card.getBoundingClientRect().width : track.clientWidth / 3) + 20;
+  }
+
+  function scrollProof(dir) {
+    const step = dir * cardStep();
+    if ('scrollBehavior' in document.documentElement.style) {
+      track.scrollBy({left: step, behavior: 'smooth'});
+    } else {
+      track.scrollLeft += step;
+    }
+  }
+
+  const leftBtn = document.getElementById('proofArrowLeft');
+  const rightBtn = document.getElementById('proofArrowRight');
+  if (leftBtn) leftBtn.addEventListener('click', function() { scrollProof(-1); });
+  if (rightBtn) rightBtn.addEventListener('click', function() { scrollProof(1); });
+
+  // Drag-to-scroll fallback (mouse)
+  let isDown = false, startX = 0, startScroll = 0;
+  track.addEventListener('mousedown', function(e) {
+    isDown = true;
+    startX = e.pageX;
+    startScroll = track.scrollLeft;
+    track.style.cursor = 'grabbing';
+  });
+  window.addEventListener('mouseup', function() {
+    isDown = false;
+    track.style.cursor = '';
+  });
+  window.addEventListener('mousemove', function(e) {
+    if (!isDown) return;
+    e.preventDefault();
+    track.scrollLeft = startScroll - (e.pageX - startX);
+  });
+})();
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -968,7 +1003,7 @@ const obs = new IntersectionObserver(entries => {
       e.target.style.transform = 'translateY(0)';
     }
   });
-}, {threshold: 0.07});
+}, {threshold:0.07});
 document.querySelectorAll('.music-card,.mkt-card,.album-item,.contact-item,.ww-logo-item,.ww-text-item,.proof-card,.identity-stat').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(20px)';
@@ -994,4 +1029,9 @@ document.querySelectorAll('.nav-dropdown-toggle').forEach(function(toggle) {
 document.querySelectorAll('.nav-links a:not(.nav-dropdown-toggle)').forEach(function(link) {
   link.addEventListener('click', function() {
     document.querySelector('.nav-links').classList.remove('mobile-open');
-    document.querySelector('.nav-hamburger') && document.querySelector('.nav-hamburg
+    document.querySelector('.nav-hamburger') && document.querySelector('.nav-hamburger').classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
