@@ -141,6 +141,39 @@ nav{
 }
 .back-btn:hover{background:var(--orange2)}
 
+/* PORTFOLIO CTA */
+.portfolio-cta{
+  padding:6rem 4rem;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;
+  background:var(--dark2);border-bottom:1px solid rgba(232,101,10,0.12);
+}
+.pf-icon{
+  width:80px;height:80px;border:2px solid rgba(232,101,10,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2rem;margin-bottom:2.5rem;color:var(--orange);
+  border-radius:2px;
+}
+.pf-title{
+  font-family:var(--serif);font-size:2.2rem;font-weight:700;
+  color:#fff;margin-bottom:1rem;
+}
+.pf-title span{color:var(--orange)}
+.pf-body{
+  font-size:1rem;color:rgba(255,255,255,0.45);line-height:1.85;
+  max-width:520px;margin-bottom:2.5rem;font-weight:300;
+}
+.pf-btn{
+  font-family:var(--mono);font-size:0.79rem;letter-spacing:0.1em;text-transform:uppercase;
+  background:transparent;color:#fff;padding:14px 28px;text-decoration:none;
+  border:1.5px solid var(--orange);
+  display:inline-flex;align-items:center;gap:10px;font-weight:700;
+  transition:all 0.2s;
+}
+.pf-btn:hover{background:var(--orange)}
+@media(max-width:600px){
+  .portfolio-cta{padding:4rem 1.5rem}
+}
+
 footer{
   background:#111620;
   padding:2.5rem 3rem;
@@ -213,6 +246,13 @@ footer{
   <div class="page-eyebrow">Blog</div>
   <h1 class="page-title">Thoughts &amp; <span>Takes.</span></h1>
   <p class="page-sub">On marketing, music, building things, and everything in between.</p>
+</div>
+
+<div class="portfolio-cta">
+  <div class="pf-icon"><i class="fas fa-newspaper" aria-hidden="true"></i></div>
+  <h2 class="pf-title">Published <span>Work.</span></h2>
+  <p class="pf-body">While my personal writing takes shape, you can already read the content I've shipped for brands. Bylines, campaigns, and copy across SaaS and tech, all collected on Muck Rack.</p>
+  <a href="https://muckrack.com/romeo-rozario/portfolio" target="_blank" class="pf-btn"><i class="fas fa-pen-nib" aria-hidden="true"></i> View My Muck Rack Portfolio</a>
 </div>
 
 <div class="coming-soon">
