@@ -187,18 +187,19 @@ nav{
 .mr-label::after{content:'';flex:1;height:1px;background:rgba(232,101,10,0.2)}
 .mr-scroll-wrap{position:relative;padding:0 30px;max-width:1400px;width:100%}
 .mr-track{
-  display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;
+  display:grid;grid-template-rows:repeat(2,1fr);grid-auto-flow:column;gap:20px;
+  overflow-x:auto;scroll-snap-type:x mandatory;
   scrollbar-width:none;-ms-overflow-style:none;padding-bottom:4px;
 }
 .mr-track::-webkit-scrollbar{display:none}
 .mr-card{
-  flex:0 0 calc(25% - 15px);scroll-snap-align:start;
+  width:300px;scroll-snap-align:start;
   background:var(--dark);border:1px solid rgba(232,101,10,0.15);
   text-decoration:none;color:#fff;display:flex;flex-direction:column;
   transition:transform 0.2s,border-color 0.2s;
 }
 .mr-card:hover{transform:translateY(-4px);border-color:var(--orange)}
-.mr-card-img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#000}
+.mr-card-img{width:100%;aspect-ratio:16/9;object-fit:contain;display:block;background:var(--dark3)}
 .mr-card-body{padding:1.2rem}
 .mr-card-pub{
   font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;
@@ -219,11 +220,11 @@ nav{
 .mr-arrow-right{right:-8px}
 @media(max-width:900px){
   .mr-section{padding:0 2rem 4rem}
-  .mr-card{flex:0 0 calc(50% - 10px)}
+  .mr-card{width:240px}
 }
 @media(max-width:600px){
   .mr-section{padding:0 1.5rem 3rem}
-  .mr-card{flex:0 0 85%}
+  .mr-card{width:220px}
   .mr-scroll-wrap{padding:0 20px}
 }
 
