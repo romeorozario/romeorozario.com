@@ -187,9 +187,10 @@ nav{
 .proof-arrow-right{right:-8px}
 
 /* JOB CARDS */
-.mkt-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5px;background:rgba(109,92,224,0.1)}
-.mkt-card{background:var(--light);padding:2.8rem 2.6rem;transition:background 0.2s;border-radius:var(--radius-md)}
+.mkt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:rgba(109,92,224,0.1)}
+.mkt-card{background:var(--light);padding:2.8rem 2.6rem;transition:background 0.2s;border-radius:var(--radius-md);display:flex;flex-direction:column}
 .mkt-card:hover{background:var(--light2)}
+.mkt-card>.btn{margin-top:auto;align-self:flex-start}
 .mkt-num{font-family:var(--mono);font-size:0.79rem;color:rgba(255,255,255,0.2);letter-spacing:0.14em;margin-bottom:1.3rem}
 .mkt-co{font-family:var(--mono);font-size:0.81rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.7rem;font-weight:700;background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
 .mkt-role{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:#fff;line-height:1.25;margin-bottom:0.9rem}
@@ -198,6 +199,8 @@ nav{
 .stat-val{font-family:var(--mono);font-size:1.35rem;font-weight:700;display:block;background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
 .stat-lbl{font-size:0.79rem;color:rgba(255,255,255,0.38);margin-top:3px}
 .mkt-card-logo{height:32px;width:auto;object-fit:contain;display:block;margin-bottom:1.2rem}
+.mkt-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.4rem}
+.mkt-tag{font-family:var(--mono);font-size:0.79rem;letter-spacing:0.05em;background:rgba(109,92,224,0.1);border:1.5px solid rgba(109,92,224,0.4);color:rgba(255,255,255,0.68);padding:8px 16px;border-radius:var(--radius-pill)}
 
 /* WORKED WITH */
 .worked-with{margin-top:4rem;padding:3rem 1rem 0;border-top:1px solid rgba(109,92,224,0.15)}
@@ -372,7 +375,7 @@ body.nav-open-lock{overflow:hidden}
   /* Work */
   #marketing{padding:4rem 2rem}
   .mkt-header{padding:0}
-  .mkt-grid{grid-template-columns:1fr}
+  .mkt-grid{grid-template-columns:repeat(2,1fr)}
   .proof-card{flex:0 0 calc(78% - 14px)}
   .proof-scroll-wrap{padding:0 20px}
 
@@ -425,6 +428,7 @@ body.nav-open-lock{overflow:hidden}
   #marketing{padding:3rem 1.2rem}
   .mkt-main-title{font-size:2rem}
   .proof-card{flex:0 0 calc(88% - 14px)}
+  .mkt-grid{grid-template-columns:1fr}
   .mkt-stats{gap:1rem 1.5rem}
 
   /* Work Samples */
@@ -780,6 +784,30 @@ body.custom-cursor-on,body.custom-cursor-on a,body.custom-cursor-on button,body.
         <div><span class="stat-val">15K+</span><div class="stat-lbl">Newsletter Subscribers</div></div>
       </div>
       <a href="https://welldev.io" target="_blank" class="btn btn-solid-orange btn-sm">Visit Site &#8594;</a>
+    </div>
+    <div class="mkt-card">
+      <div class="mkt-num">05</div>
+      <img loading="lazy" src="images/index-extracted-22.png" class="mkt-card-logo" alt="WPManageNinja">
+      <div class="mkt-co">WPManageNinja (AuthLab) &middot; Digital Marketing Strategist</div>
+      <h3 class="mkt-role">Content and product marketing for a WordPress plugin suite used across thousands of sites.</h3>
+      <div class="mkt-tags">
+        <span class="mkt-tag">Paymattic</span>
+        <span class="mkt-tag">AzonPress</span>
+        <span class="mkt-tag">Fluent Forms</span>
+      </div>
+      <a href="https://wpmanageninja.com" target="_blank" class="btn btn-solid-orange btn-sm">Visit Site &#8594;</a>
+    </div>
+    <div class="mkt-card">
+      <div class="mkt-num">06</div>
+      <img loading="lazy" src="images/wpmet-logo.svg" class="mkt-card-logo" alt="WPMet">
+      <div class="mkt-co">WPMet (XpeedStudio) &middot; Creative Content Writer</div>
+      <h3 class="mkt-role">SEO content, ad copy, and social strategy across a WordPress and AI product portfolio.</h3>
+      <div class="mkt-tags">
+        <span class="mkt-tag">GetGenie AI</span>
+        <span class="mkt-tag">ShopEngine</span>
+        <span class="mkt-tag">ElementsKit</span>
+      </div>
+      <a href="https://wpmet.com" target="_blank" class="btn btn-solid-orange btn-sm">Visit Site &#8594;</a>
     </div>
   </div>
 
