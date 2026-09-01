@@ -204,12 +204,20 @@ nav{
 
 /* WORKED WITH */
 .worked-with{margin-top:4rem;padding:3rem 1rem 0;border-top:1px solid rgba(109,92,224,0.15)}
-.ww-label{font-family:var(--sans);font-size:0.95rem;color:rgba(255,255,255,0.4);margin-bottom:2rem}
-.ww-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:40px;background:#F4F5FA;border:1px solid rgba(0,0,0,0.08);border-radius:16px;padding:24px 32px}
-.ww-logo-item{display:flex;align-items:center;cursor:default}
-.ww-logo-item img{max-height:32px;width:auto;object-fit:contain;display:block}
+.ww-label{font-family:var(--serif);font-size:2.6rem;font-weight:700;color:#fff;line-height:1.1;margin-bottom:2rem}
+.ww-label span{background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.ww-row{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));grid-template-rows:repeat(2,auto);column-gap:32px;row-gap:40px;justify-items:center;align-items:center;background:#F4F5FA;border:1px solid rgba(0,0,0,0.08);border-radius:16px;padding:24px 32px}
+.ww-logo-item{display:flex;align-items:center;justify-content:center;min-width:0;cursor:default}
+.ww-logo-item img{max-height:32px;max-width:100%;width:auto;object-fit:contain;display:block}
 .ww-logo-chip{background:var(--ink);padding:8px 14px;border-radius:8px}
 .ww-logo-chip img{max-height:22px}
+@media(max-width:1023px){
+  .ww-row{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(4,auto)}
+}
+@media(max-width:767px){
+  .ww-row{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(8,auto)}
+  .ww-label{font-size:2rem}
+}
 .ww-text-item{font-family:var(--serif);font-size:1.05rem;font-weight:700;color:rgba(10,15,24,0.55);padding-right:1.8rem;border-right:1.5px solid rgba(0,0,0,0.1);transition:color 0.2s;cursor:default}
 .ww-text-item:last-child{border-right:none}
 .ww-text-item:hover{background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
@@ -462,7 +470,7 @@ body.nav-open-lock{overflow:hidden}
 /* MODERN MOTION */
 #scroll-progress{position:fixed;top:0;left:0;height:3px;width:0%;background:var(--accent-grad);z-index:999;pointer-events:none}
 nav.nav-scrolled{background:rgba(20,20,20,0.65);box-shadow:0 8px 32px rgba(0,0,0,0.4)}
-.reveal-init{opacity:0;transform:translateY(28px) scale(0.97);transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1)}
+.reveal-init{opacity:0;transform:translateY(28px) scale(0.99);transition:opacity 0.45s cubic-bezier(0.16,1,0.3,1),transform 0.45s cubic-bezier(0.16,1,0.3,1)}
 .reveal-init.revealed{opacity:1;transform:translateY(0) scale(1)}
 
 /* Hero: vertical badge + corner meta */
@@ -814,24 +822,24 @@ body.custom-cursor-on,body.custom-cursor-on a,body.custom-cursor-on button,body.
 
   <!-- WORKED WITH -->
   <div class="worked-with">
-    <div class="ww-label">Companies I've worked with</div>
+    <div class="ww-label">Companies I've <span>worked</span> with</div>
     <div class="ww-row">
-      <div class="ww-logo-item"><img loading="lazy" src="images/index-extracted-22.png" alt="WP Manage Ninja"></div>
-      <div class="ww-logo-item"><img loading="lazy" src="images/index-extracted-20.png" alt="Care Skills Training"></div>
+      <div class="ww-logo-item"><img loading="lazy" src="images/ewarmup-logo.png" alt="E-Warmup"></div>
+      <div class="ww-logo-item ww-logo-chip"><img loading="lazy" src="images/sendcopy-logo.png" alt="SendCopy"></div>
+      <div class="ww-logo-item"><img loading="lazy" src="serpely-logo-mono.png" alt="Serpely"></div>
       <div class="ww-logo-item"><img loading="lazy" src="images/index-extracted-24.png" alt="WellDev AG"></div>
-      <div class="ww-logo-item"><img loading="lazy" src="images/index-extracted-25.png" alt="InnoTix"></div>
-      <div class="ww-logo-item"><img loading="lazy" src="images/index-extracted-26.png" alt="Rhätische Bahn"></div>
+      <div class="ww-logo-item"><img loading="lazy" src="images/index-extracted-20.png" alt="Care Skills Training"></div>
       <div class="ww-logo-item"><img loading="lazy" src="images/index-extracted-27.png" alt="Essential Safety Training"></div>
+      <div class="ww-logo-item"><img loading="lazy" src="images/trueact-logo.png" alt="trueAct"></div>
+      <div class="ww-logo-item"><img loading="lazy" src="images/index-extracted-25.png" alt="InnoTix"></div>
+      <div class="ww-logo-item"><img loading="lazy" src="images/index-extracted-22.png" alt="WP Manage Ninja"></div>
+      <div class="ww-logo-item"><img loading="lazy" src="images/index-extracted-26.png" alt="Rhätische Bahn"></div>
+      <div class="ww-logo-item"><img loading="lazy" src="images/wpmet-logo.svg" alt="WPMet"></div>
+      <div class="ww-logo-item"><img loading="lazy" src="images/wpcenter-logo.svg" alt="WPCenter"></div>
+      <div class="ww-logo-item"><img loading="lazy" src="images/affiliatex-logo.png" alt="AffiliateX"></div>
       <div class="ww-logo-item"><img loading="lazy" src="images/index-extracted-28.png" alt="FluentCRM"></div>
       <div class="ww-logo-item"><img loading="lazy" src="images/index-extracted-29.png" alt="Fluent Forms"></div>
       <div class="ww-logo-item"><img loading="lazy" src="images/index-extracted-30.png" alt="GetGenie"></div>
-      <div class="ww-logo-item"><img loading="lazy" src="serpely-logo-mono.png" alt="Serpely"></div>
-      <div class="ww-logo-item"><img loading="lazy" src="images/wpmet-logo.svg" alt="WPMet"></div>
-      <div class="ww-logo-item"><img loading="lazy" src="images/ewarmup-logo.png" alt="E-Warmup"></div>
-      <div class="ww-logo-item"><img loading="lazy" src="images/wpcenter-logo.svg" alt="WPCenter"></div>
-      <div class="ww-logo-item ww-logo-chip"><img loading="lazy" src="images/sendcopy-logo.png" alt="SendCopy"></div>
-      <div class="ww-logo-item"><img loading="lazy" src="images/trueact-logo.png" alt="trueAct"></div>
-      <div class="ww-logo-item"><img loading="lazy" src="images/affiliatex-logo.png" alt="AffiliateX"></div>
     </div>
   </div>
 
@@ -1073,12 +1081,12 @@ const obs = new IntersectionObserver(entries => {
     if (e.isIntersecting) {
       const siblings = Array.from(e.target.parentElement.children).filter(el => el.classList.contains('reveal-init'));
       const idx = siblings.indexOf(e.target);
-      e.target.style.transitionDelay = (Math.min(idx, 6) * 0.07) + 's';
+      e.target.style.transitionDelay = (Math.min(idx, 6) * 0.05) + 's';
       e.target.classList.add('revealed');
       obs.unobserve(e.target);
     }
   });
-}, {threshold:0.12});
+}, {threshold:0.12, rootMargin:'0px 0px 200px 0px'});
 revealTargets.forEach(el => obs.observe(el));
 
 // Mobile nav
