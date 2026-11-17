@@ -42,6 +42,13 @@ Every page shares the same header, footer, `<head>` setup (theme script, Google 
 - Writing style: conversational, data-driven, no em dashes.
 - When adding a page, add it to the nav and footer in every file and to `sitemap.xml`.
 
+## SEO
+
+- Each page has its own `<title>` (under 60 characters), meta description (150 to 160 characters), keywords, robots, canonical, Open Graph and Twitter tags, and structured data. Keep og:title, twitter:title, og:description and twitter:description matching the title and description.
+- Use the full name "Romeo Nicholas Rozario" in titles and "Romeo Rozario" in descriptions or body copy, so both forms are indexed. The homepage Person schema lists both (`alternateName`).
+- Target keywords: digital marketing specialist, content marketing, digital marketing, marketing specialist, SEO, GEO, AEO, SaaS marketing (home, portfolio, blogs); guitarist, musician, producer (music).
+- External links open in a new tab with `target="_blank" rel="noopener"`.
+
 ## Checking changes
 
 Serve the folder locally (`python3 -m http.server 8765`) and open the pages at desktop (1440px), tablet (768px) and phone (390px) widths, in light and dark mode. Paths are root-relative (`/css/site.css`), so open pages through the server, not as `file://`.
