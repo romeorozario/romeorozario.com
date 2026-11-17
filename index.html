@@ -8,8 +8,9 @@
   (function () {
     var d = document.documentElement, t = null;
     d.classList.add("js");
-    try { t = localStorage.getItem("theme"); } catch (e) {}
-    if (t !== "light" && t !== "dark") t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    /* Light by default on every new visit; a dark choice lasts for this browser session only. */
+    try { t = sessionStorage.getItem("theme"); } catch (e) {}
+    if (t !== "dark") t = "light";
     d.setAttribute("data-theme", t);
   })();
 </script>
