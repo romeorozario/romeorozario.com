@@ -42,6 +42,8 @@
   --footer-bg: #FFFFFF;
 
   --display: "Manrope", "Geist", system-ui, sans-serif;
+  --serif: "Unna", Georgia, "Times New Roman", serif;
+  --accent-grad: linear-gradient(135deg, #F97316 0%, #F97316 28%, #8B5CF6 72%, #8B5CF6 100%);
   --sans: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "Geist Mono", ui-monospace, "SFMono-Regular", monospace;
 
@@ -164,13 +166,17 @@ button { font: inherit; color: inherit; }
 .site-header.is-scrolled { box-shadow: 0 10px 30px -20px rgba(11, 21, 48, 0.35); }
 .header-row { min-height: var(--header-h); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
-.brand-mark {
-  width: 34px; height: 34px; border-radius: 10px; background: var(--orange); color: var(--ink);
-  display: inline-flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; font-size: 16px;
-  transition: transform 0.6s var(--ease);
+.brand-name {
+  font-family: var(--serif); font-weight: 700; font-size: 23px; line-height: 1; letter-spacing: 0.005em; white-space: nowrap;
+  padding: 10px 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--surf);
+  box-shadow: 0 1px 2px rgba(11, 21, 48, 0.05); transition: border-color 0.4s ease, box-shadow 0.5s var(--ease), transform 0.5s var(--ease);
 }
-.brand:hover .brand-mark { transform: rotate(-8deg) scale(1.06); }
-.brand-name { font-family: var(--display); font-weight: 700; font-size: 19px; letter-spacing: -0.01em; }
+[data-theme="dark"] .brand-name { background: rgba(255, 255, 255, 0.05); }
+.brand:hover .brand-name { border-color: var(--orange); box-shadow: 0 10px 24px -14px rgba(249, 115, 22, 0.6); transform: translateY(-1px); }
+.grad {
+  background: var(--accent-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+  padding-right: 0.04em;
+}
 
 .nav-links { display: flex; align-items: center; gap: 4px; font-size: 15px; }
 .nav-links a {
@@ -450,7 +456,7 @@ button { font: inherit; color: inherit; }
 .site-footer { background: var(--footer-bg); padding: 64px 0 48px; border-top: 1px solid var(--line); }
 .site-footer .wrap { display: flex; flex-direction: column; gap: 40px; }
 .footer-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px; }
-.footer-top .name { font-family: var(--display); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; }
+.footer-top .name { font-family: var(--serif); font-weight: 700; font-size: 30px; letter-spacing: 0.005em; }
 .footer-top .tag { color: var(--muted); }
 .footer-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 48px; font-size: 15px; }
 .footer-nav a, .footer-social a { text-decoration: none; transition: color 0.3s ease; }
@@ -960,7 +966,8 @@ a.ccard:hover .cover img { transform: scale(1.05); }
   :root { --gutter: 20px; --header-h: 64px; }
   body { font-size: 16px; }
   .header-actions .btn { display: none; }
-  .brand-name { font-size: 17px; }
+  .brand-name { font-size: 19px; padding: 8px 14px; }
+  .brand-name .mid { display: none; }
   .hero-sub { font-size: 17px; }
   .start-grid, .svc-grid, .exp-grid, .blog-grid { grid-template-columns: 1fr; }
   .start-card { min-height: 300px; }

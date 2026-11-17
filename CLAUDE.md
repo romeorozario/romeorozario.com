@@ -29,6 +29,8 @@ Every page shares the same header, footer, `<head>` setup (theme script, Google 
 
 ## Conventions
 
+- Brand: the header shows "Romeo Nicholas Rozario" in Unna (`--serif`) inside a pill, with "Rozario" in the orange-to-violet `--accent-grad` (`.grad`). "Nicholas" (`.mid`) hides on phones. The footer name uses the same style.
+
 - Theme: every new visit opens in light mode. The toggle switches to dark, and that choice is kept in `sessionStorage` only, so it lasts while the visitor browses this session and resets to light next time. The pre-paint script in each page's `<head>` and `applyTheme` in `js/site.js` implement this; keep them in sync.
 
 - Animation hooks are attributes: `data-reveal` (fade up on scroll; `="fade"` or `="scale"` variants), `data-stagger` on a parent to cascade its `data-reveal` children, `data-enter` with `style="--d: <ms>"` for hero entrance.
