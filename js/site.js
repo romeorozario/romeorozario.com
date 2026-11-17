@@ -14,7 +14,7 @@
   /* ---------- Theme toggle with a circular reveal ---------- */
   function applyTheme(theme) {
     doc.setAttribute("data-theme", theme);
-    try { localStorage.setItem("theme", theme); } catch (e) {}
+    try { sessionStorage.setItem("theme", theme); } catch (e) {}
     var meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute("content", theme === "dark" ? "#070C1A" : "#F6F7FB");
     document.querySelectorAll("[data-theme-toggle]").forEach(function (b) {
