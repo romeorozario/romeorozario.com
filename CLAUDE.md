@@ -4,9 +4,13 @@ Personal site of Romeo Nicholas Rozario (digital marketer, guitarist). Plain sta
 
 ## Deploying
 
-The live site deploys from the `main` branch. To publish a change: commit on a working branch, open a pull request into `main`, and merge it. The host redeploys automatically within a couple of minutes.
+The live site deploys from the `main` branch. To publish a change: commit on a working branch, open a pull request into `main`, and merge it. The site is hosted on Cloudflare Pages, which redeploys automatically within a couple of minutes and posts a "Cloudflare Pages" check on each pull request.
+
+Cloudflare Pages rejects any single file over 25 MiB and the whole deploy fails. Compress large videos (for example with ffmpeg) before committing them.
 
 ## Pages
+
+Cloudflare Pages serves clean URLs: `/portfolio`, `/blog`, `/music`, `/education` (the `.html` versions 308-redirect there). Always link, canonicalize and list in `sitemap.xml` using the clean form.
 
 | Page | File | Notes |
 |---|---|---|
