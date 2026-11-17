@@ -29,6 +29,9 @@ Every page shares the same header, footer, `<head>` setup (theme script, Google 
 
 ## Conventions
 
+- Rotating words: add `data-rotate="word|word|word"` to a span whose text is the first word (it stays in the HTML for SEO). Optional `data-rotate-every` and `data-rotate-start` in ms. The home headline cycles matter. > rank. > convert. > grow. > shine. It pauses off-screen and stays still for reduced-motion visitors.
+- Punchline: `.punch` under the hero headline is italic Unna, with `.king` in the brand gradient and a `.crown` that drops in. Home: "Growth happens with content. And content? Still king." Portfolio: "Every growth story on this page starts with content. Long live the king."
+
 - Brand: the header shows "Romeo Nicholas Rozario" in Unna (`--serif`) inside a pill, with "Rozario" in the orange-to-violet `--accent-grad` (`.grad`). "Nicholas" (`.mid`) hides on phones. The footer name uses the same style.
 
 - Theme: every new visit opens in light mode. The toggle switches to dark, and that choice is kept in `sessionStorage` only, so it lasts while the visitor browses this session and resets to light next time. The pre-paint script in each page's `<head>` and `applyTheme` in `js/site.js` implement this; keep them in sync.
