@@ -102,6 +102,67 @@
     el.classList.add("is-split");
   });
 
+  /* ---------- Rotating words (headline word, hero pill ticker) ----------
+     The first phrase stays in the HTML for SEO and screen readers; the others
+     slide through a mask. Options: data-rotate="a|b|c", data-rotate-every
+     (ms between swaps), data-rotate-start (ms before the first swap). */
+  document.querySelectorAll("[data-rotate]").forEach(function (rot) {
+    if (still() || !rot.animate) return;
+    var mask = rot.querySelector(".w") || rot;
+    var cur = mask.firstElementChild;
+    if (!cur) return;
+    var words = [cur.textContent.trim()].concat(rot.getAttribute("data-rotate").split("|"));
+    var every = +rot.getAttribute("data-rotate-every") || 2300;
+    var start = +rot.getAttribute("data-rotate-start") || 2600;
+    var idx = 0, timer = 0, visible = true, busy = false, off = false;
+    var EASE_OUT = "cubic-bezier(0.65, 0, 0.35, 1)", EASE_IN = "cubic-bezier(0.22, 1, 0.36, 1)";
+    cur.setAttribute("data-word", words[0]);
+    mask.style.position = "relative";
+    /* reserve the widest phrase so nothing reflows; if it cannot fit on one
+       line (small phones), keep the first phrase still instead */
+    var fit = function () {
+      var probe = document.createElement("span");
+      probe.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap;left:0;top:0";
+      mask.appendChild(probe);
+      var w = 0;
+      words.forEach(function (t) { probe.textContent = t; probe.setAttribute("data-word", t); w = Math.max(w, probe.getBoundingClientRect().width); });
+      mask.removeChild(probe);
+      var room = rot.getAttribute("data-rotate-room");
+      var max = room ? rot.closest(room).parentNode.getBoundingClientRect().width - (+rot.getAttribute("data-rotate-pad") || 0) : Infinity;
+      off = w > max;
+      mask.style.width = off ? "" : Math.ceil(w + 2) + "px";
+      mask.style.whiteSpace = off ? "" : "nowrap";
+      if (off && idx !== 0) { mask.innerHTML = ""; cur = document.createElement("span"); cur.textContent = words[0]; mask.appendChild(cur); idx = 0; }
+    };
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(fit);
+    addEventListener("resize", fit);
+    var schedule = function () { clearTimeout(timer); timer = setTimeout(swap, every); };
+    var swap = function () {
+      if (off || busy || !visible || document.hidden) return schedule();
+      busy = true;
+      idx = (idx + 1) % words.length;
+      var next = document.createElement("span");
+      next.textContent = words[idx];
+      next.setAttribute("data-word", words[idx]);
+      next.style.cssText = "position:absolute;left:0;top:0;display:inline-block;white-space:nowrap";
+      mask.appendChild(next);
+      var out = cur.animate([{ transform: "translate3d(0,0,0)", opacity: 1 }, { transform: "translate3d(0,-105%,0)", opacity: 0 }],
+                            { duration: 620, easing: EASE_OUT, fill: "forwards" });
+      var inn = next.animate([{ transform: "translate3d(0,105%,0) rotate(4deg)" }, { transform: "translate3d(0,0,0) rotate(0deg)" }],
+                             { duration: 820, delay: 90, easing: EASE_IN, fill: "both" });
+      Promise.all([out.finished, inn.finished]).then(function () {
+        if (cur.parentNode) cur.parentNode.removeChild(cur);
+        next.style.position = "static";
+        inn.cancel();
+        cur = next; busy = false; schedule();
+      });
+    };
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(rot);
+    }
+    timer = setTimeout(swap, start);
+  });
+
   /* ---------- Scroll reveal with automatic stagger ---------- */
   document.querySelectorAll("[data-stagger]").forEach(function (group) {
     var n = 0;
