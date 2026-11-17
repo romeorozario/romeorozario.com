@@ -214,6 +214,132 @@
     dlg.addEventListener("cancel", function (e) { e.preventDefault(); close(); });
   }
 
+  /* ---------- Post slider: arrows drive native scroll-snap ---------- */
+  document.querySelectorAll("[data-slider]").forEach(function (root) {
+    var track = root.querySelector(".slider-track");
+    var slides = Array.prototype.slice.call(track.children);
+    var prev = root.querySelector(".arrow-btn.prev"), next = root.querySelector(".arrow-btn.next");
+    var count = root.querySelector(".count");
+    var step = function () {
+      var w = slides[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 18);
+      return Math.max(1, Math.floor(track.clientWidth / w)) * w;
+    };
+    var update = function () {
+      var max = track.scrollWidth - track.clientWidth - 2;
+      if (prev) prev.disabled = track.scrollLeft <= 2;
+      if (next) next.disabled = track.scrollLeft >= max;
+      var tr = track.getBoundingClientRect(), seen = 0;
+      slides.forEach(function (sl) {
+        var r = sl.getBoundingClientRect();
+        var full = r.left >= tr.left - 2 && r.right <= tr.right + 2;
+        sl.classList.toggle("is-peek", !full && r.left < tr.right && r.right > tr.left);
+        if (r.right <= tr.right + 2) seen++;
+      });
+      if (count) count.textContent = Math.min(seen, slides.length) + " of " + slides.length + " posts";
+    };
+    if (prev) prev.addEventListener("click", function () { track.scrollBy({ left: -step(), behavior: still() ? "auto" : "smooth" }); });
+    if (next) next.addEventListener("click", function () { track.scrollBy({ left: step(), behavior: still() ? "auto" : "smooth" }); });
+    var raf = 0;
+    track.addEventListener("scroll", function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
+    addEventListener("resize", update);
+    update();
+  });
+
+  /* ---------- Pager: pages of cards that slide in and out ---------- */
+  document.querySelectorAll("[data-pager]").forEach(function (root) {
+    var pages = root.querySelectorAll(".pager-page");
+    var prev = root.querySelector(".arrow-btn.prev"), next = root.querySelector(".arrow-btn.next");
+    var label = root.parentNode.querySelector("[data-pager-label]");
+    var cur = 0;
+    var show = function (n, dir) {
+      pages.forEach(function (pg, i) {
+        pg.classList.remove("from-left", "from-right");
+        if (i === n) { pg.classList.add("is-current"); pg.removeAttribute("aria-hidden"); pg.inert = false; }
+        else {
+          if (pg.classList.contains("is-current")) pg.classList.add(dir > 0 ? "from-left" : "from-right");
+          pg.classList.remove("is-current"); pg.setAttribute("aria-hidden", "true"); pg.inert = true;
+        }
+      });
+      if (dir) {
+        var incoming = pages[n];
+        incoming.classList.add(dir > 0 ? "from-right" : "from-left");
+        incoming.getBoundingClientRect();
+        incoming.classList.remove("from-right", "from-left");
+      }
+      cur = n;
+      if (prev) prev.disabled = n === 0;
+      if (next) next.disabled = n === pages.length - 1;
+      if (label) label.textContent = (n + 1) + " / " + pages.length;
+    };
+    var toTop = function () {
+      var top = root.getBoundingClientRect().top;
+      if (top < 0) scrollBy({ top: top - 120, behavior: still() ? "auto" : "smooth" });
+    };
+    if (prev) prev.addEventListener("click", function () { if (cur > 0) { show(cur - 1, -1); toTop(); } });
+    if (next) next.addEventListener("click", function () { if (cur < pages.length - 1) { show(cur + 1, 1); toTop(); } });
+    show(0, 0);
+  });
+
+  /* ---------- Jump nav: highlight the section in view ---------- */
+  var jump = document.querySelector("[data-jump]");
+  if (jump && "IntersectionObserver" in window) {
+    var links = jump.querySelectorAll("a[href^='#']");
+    var map = {};
+    links.forEach(function (a) { var sec = document.getElementById(a.getAttribute("href").slice(1)); if (sec) map[sec.id] = a; });
+    var setActive = function (id) {
+      links.forEach(function (a) { a.classList.toggle("is-active", map[id] === a); });
+      var a = map[id];
+      if (a) {
+        var bar = a.parentNode, left = a.offsetLeft - bar.clientWidth / 2 + a.clientWidth / 2;
+        bar.scrollTo({ left: left, behavior: still() ? "auto" : "smooth" });
+      }
+    };
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) setActive(en.target.id); });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+    Object.keys(map).forEach(function (id) { spy.observe(document.getElementById(id)); });
+  }
+
+  /* ---------- Click-to-play YouTube and Spotify (no heavy embeds until asked) ---------- */
+  document.querySelectorAll("[data-yt]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+      e.preventDefault();
+      var frame = a.querySelector(".frame");
+      if (frame.querySelector("iframe")) return;
+      var f = document.createElement("iframe");
+      f.src = "https://www.youtube-nocookie.com/embed/" + a.getAttribute("data-yt") + "?autoplay=1&rel=0";
+      f.title = a.getAttribute("aria-label") || "YouTube video";
+      f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      f.allowFullscreen = true;
+      frame.appendChild(f);
+    });
+  });
+  document.querySelectorAll("[data-spotify]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+      e.preventDefault();
+      var box = document.createElement("div");
+      box.className = "sp-embed";
+      box.innerHTML = '<iframe loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="' +
+        (a.getAttribute("aria-label") || "Spotify player") + '" src="https://open.spotify.com/embed/artist/' + a.getAttribute("data-spotify") + '?utm_source=generator"></iframe>';
+      a.replaceWith(box);
+    });
+  });
+
+  /* ---------- Muted videos play while on screen, pause when off ---------- */
+  var vids = document.querySelectorAll("video[data-autoplay]");
+  if (vids.length && "IntersectionObserver" in window && !still()) {
+    var vio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var v = en.target;
+        if (en.isIntersecting) { v.preload = "auto"; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        else if (!v.paused) v.pause();
+      });
+    }, { threshold: 0.5 });
+    vids.forEach(function (v) { vio.observe(v); });
+  }
+
   /* ---------- Footer year ---------- */
   document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();
