@@ -43,6 +43,7 @@ Every page shares the same header, footer, `<head>` setup (theme script, Google 
 - Images live in `images/` by type (`site`, `brand-logos`, `blog-covers`, `social-media-designs`, `ad-creatives`, `ui-ux`, `seo-analytics`, `email-designs`, `music`, `certificates`). Use `.webp`, include `width` and `height`, and `loading="lazy"` below the fold.
 - Videos live in `videos/`. Pages use the compressed `*-web.mp4` versions with a poster image; the full-size originals are kept for reference only.
 - Writing style: conversational, data-driven, no em dashes.
+- No decorative numbering ("01 /", "02", step counters) on labels, nav pills or cards. It reads as templated.
 - When adding a page, add it to the nav and footer in every file and to `sitemap.xml`.
 
 ## SEO
