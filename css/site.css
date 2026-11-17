@@ -265,7 +265,7 @@ button { font: inherit; color: inherit; }
 /* Headline split into words by JS: each word slides up from a mask */
 .js .hero h1:not(.is-split) { opacity: 0; animation: show 0s 1.2s forwards; }
 @keyframes show { to { opacity: 1; } }
-.hero h1 .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.hero h1 .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.24em; margin-bottom: -0.24em; }
 .hero h1 .w > span { display: inline-block; animation: word-up 1.05s var(--ease) both; animation-delay: calc(120ms + var(--i) * 70ms); }
 @keyframes word-up { from { transform: translate3d(0, 105%, 0) rotate(4deg); } }
 
@@ -573,7 +573,7 @@ html.theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: norm
 .intro h1 { font-family: var(--display); font-size: clamp(44px, 5.4vw, 68px); line-height: 1; letter-spacing: -0.04em; font-weight: 800; }
 .intro h1 .accent { color: var(--orange-text); }
 [data-theme="dark"] .intro h1 .accent { color: var(--orange); }
-.intro h1 .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.intro h1 .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.24em; margin-bottom: -0.24em; }
 .intro h1 .w > span { display: inline-block; animation: word-up 1.05s var(--ease) both; animation-delay: calc(120ms + var(--i) * 70ms); }
 .js .intro h1:not(.is-split) { opacity: 0; animation: show 0s 1.2s forwards; }
 .intro [data-enter] { animation: enter 1s var(--ease) both; animation-delay: calc(var(--d, 0) * 1ms); }
