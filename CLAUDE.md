@@ -29,6 +29,8 @@ Every page shares the same header, footer, `<head>` setup (theme script, Google 
 
 ## Conventions
 
+- Brand: the header shows "Romeo Nicholas Rozario" in Unna (`--serif`) inside a pill, with "Rozario" in the orange-to-violet `--accent-grad` (`.grad`). "Nicholas" (`.mid`) hides on phones. The footer name uses the same style.
+
 - Theme: every new visit opens in light mode. The toggle switches to dark, and that choice is kept in `sessionStorage` only, so it lasts while the visitor browses this session and resets to light next time. The pre-paint script in each page's `<head>` and `applyTheme` in `js/site.js` implement this; keep them in sync.
 
 - Animation hooks are attributes: `data-reveal` (fade up on scroll; `="fade"` or `="scale"` variants), `data-stagger` on a parent to cascade its `data-reveal` children, `data-enter` with `style="--d: <ms>"` for hero entrance.
@@ -39,6 +41,13 @@ Every page shares the same header, footer, `<head>` setup (theme script, Google 
 - Videos live in `videos/`. Pages use the compressed `*-web.mp4` versions with a poster image; the full-size originals are kept for reference only.
 - Writing style: conversational, data-driven, no em dashes.
 - When adding a page, add it to the nav and footer in every file and to `sitemap.xml`.
+
+## SEO
+
+- Each page has its own `<title>` (under 60 characters), meta description (150 to 160 characters), keywords, robots, canonical, Open Graph and Twitter tags, and structured data. Keep og:title, twitter:title, og:description and twitter:description matching the title and description.
+- Use the full name "Romeo Nicholas Rozario" in titles and "Romeo Rozario" in descriptions or body copy, so both forms are indexed. The homepage Person schema lists both (`alternateName`).
+- Target keywords: digital marketing specialist, content marketing, digital marketing, marketing specialist, SEO, GEO, AEO, SaaS marketing (home, portfolio, blogs); guitarist, musician, producer (music).
+- External links open in a new tab with `target="_blank" rel="noopener"`.
 
 ## Checking changes
 
