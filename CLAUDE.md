@@ -17,7 +17,7 @@ Cloudflare Pages serves clean URLs: `/portfolio`, `/blog`, `/music`, `/education
 | About Me (home) | `index.html` | Hero, stats, Start here cards, logo wall, Selected work bento, What I do, Experience, About, latest Blogs, Contact |
 | My Portfolio | `portfolio.html` | One page with a sticky "Jump to" nav. Sections in order: `#blogs`, `#social`, `#ads`, `#lp-web`, `#seo`, `#email` |
 | Blogs | `blog.html` | Hero heading "Written by Me". Professional blogs in pages of 8 (`.pager-page` blocks, 5 or 6 pages, no page counter), then the personal journal teaser |
-| Music | `music.html` | Bands, releases, YouTube and Spotify (click-to-play), on-stage gallery |
+| Music | `music.html` | Sections in order: hero, Bands, Releases, Listen and watch (YouTube and Spotify, click-to-play), On stage gallery, Beyond the band (services plus both FAQs, kept last), booking CTA |
 | Qualifications | `education.html` | Degrees, certificates, beyond marketing |
 
 Every page shares the same header, footer, `<head>` setup (theme script, Google tag G-9D5DWVD4LX, fonts) and loads `/css/site.css` and `/js/site.js`. If you change the header or footer, change it in all five files.
