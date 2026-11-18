@@ -24,6 +24,9 @@ Every page shares the same header, footer, `<head>` setup (theme script, Google 
 
 ## Shared files
 
+Pages load `/css/site.css?v=...` and `/js/site.js?v=...`. Cloudflare lets browsers cache these for 4 hours, so bump the `v=` value in all five pages whenever you change either file, or returning visitors keep seeing the old version.
+
+
 - `css/site.css`: design tokens at the top (`:root` for light, `[data-theme="dark"]` for dark), then home sections, then inner-page sections, then responsive rules (breakpoints 1180px, 1060px, 680px) and reduced-motion rules.
 - `js/site.js`: theme toggle (circular reveal), hide-on-scroll header, mobile menu, headline word split (`data-split`), scroll reveals, count-up stats (`data-count`), magnetic buttons (`data-magnetic`), lightbox (`img[data-zoom]`), post slider (`data-slider`), blog pager (`data-pager`), jump-nav scrollspy (`data-jump`), YouTube and Spotify click-to-play (`data-yt`, `data-spotify`), autoplay-in-view videos (`video[data-autoplay]`).
 

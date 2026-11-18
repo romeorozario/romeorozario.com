@@ -1222,12 +1222,14 @@ a.ccard:hover .cover img { transform: scale(1.05); }
   .hero-ctas .btn { width: 100%; min-height: 50px; font-size: 15px; }
   /* small labels stay on one line */
   .chip { font-size: 10.5px; letter-spacing: 0.08em; padding: 7px 12px; gap: 8px; }
-  /* Portfolio intro: smaller, centred photo with an even frame */
-  .intro { padding: 32px 0 28px; }
-  .intro-grid { gap: 40px; }
-  .intro-photo { width: 72%; max-width: 280px; margin: 0 auto; transform: translateX(-8px); }
-  .intro-photo::before { inset: 14px 14px -14px -14px; border-radius: 24px; }
-  .intro-photo img { border-radius: 24px; }
+  /* Portfolio intro on phones: name first, then a smaller photo, then the role label */
+  .intro { padding: 28px 0 28px; }
+  .intro-grid { display: flex; flex-direction: column; align-items: stretch; gap: 20px; }
+  .intro-copy { display: contents; }
+  .intro-copy > h1 { order: -2; }
+  .intro-photo { order: -1; width: 58%; max-width: 230px; margin: 6px 0 14px 14px; }
+  .intro-photo::before { inset: 12px 12px -12px -12px; border-radius: 22px; }
+  .intro-photo img { border-radius: 22px; }
   /* the role is a label, not a button: soft tint, smaller type */
   .intro-copy > .badge {
     padding: 6px 12px; font-size: 13px; font-weight: 600;
