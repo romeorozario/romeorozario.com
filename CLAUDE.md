@@ -44,6 +44,7 @@ Pages load `/css/site.css?v=...` and `/js/site.js?v=...`. `_headers` tells brows
 - Brand: the header shows "Romeo Nicholas Rozario" in Unna (`--serif`) inside a pill, with "Rozario" in `--accent-grad` (`.grad`): a cobalt (#2F4BFF) to orange (#FF6B2C) gradient that glides to orange-to-blue on hover. "Nicholas" (`.mid`) hides on phones. The footer name uses the same style.
 
 - Dark mode never changes layout: `[data-theme="dark"]` rules only change colours, so every page has the same structure in both themes.
+- Theme toggle animation (View Transitions): going to light, the light page beams out of the toggle as a growing circle; going to dark, the light page shrinks from the screen edges back into the toggle (`html.theme-vt-out` puts the old snapshot on top). Keep the two directions mirrored.
 - Theme: every new visit opens in light mode. The toggle switches to dark, and that choice is kept in `sessionStorage` only, so it lasts while the visitor browses this session and resets to light next time. The pre-paint script in each page's `<head>` and `applyTheme` in `js/site.js` implement this; keep them in sync.
 
 - Animation hooks are attributes: `data-reveal` (fade up on scroll; `="fade"` or `="scale"` variants), `data-stagger` on a parent to cascade its `data-reveal` children, `data-enter` with `style="--d: <ms>"` for hero entrance.
