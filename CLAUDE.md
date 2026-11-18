@@ -29,6 +29,9 @@ Every page shares the same header, footer, `<head>` setup (theme script, Google 
 
 ## Conventions
 
+- Desktop scale: above 1060px the whole site renders at `zoom: 0.9` (top of `css/site.css`), the same as 90% browser zoom. Any JS that turns a measured rect into a CSS length must divide by `Z()` in `js/site.js` (window scrolling does not need it).
+- Phones (680px and below): two cards per row wherever a card fits (Start here, What I do, Experience, blogs, contact, portfolio blog cards, emails, bento grids, blog pager, bands, YouTube, Spotify, education). One per row only for wide content. An odd last bento tile spans the row. The phone rules sit in the "Phones: denser layout" block near the end of `css/site.css`.
+
 - Rotating words: add `data-rotate="word|word|word"` to a span whose text is the first word (it stays in the HTML for SEO). Optional `data-rotate-every` and `data-rotate-start` in ms. The home headline cycles matter. > rank. > convert. > grow. > shine. It pauses off-screen and stays still for reduced-motion visitors.
 - Punchline: `.punch` under the hero headline is italic Unna, with `.king` in the cobalt-to-orange `--accent-grad` and an orange `.crown` that drops in. Home: "Growth happens with content. And content? Still king." Portfolio: "Every growth story on this page starts with content. Long live the king."
 

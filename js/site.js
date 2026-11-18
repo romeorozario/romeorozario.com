@@ -10,6 +10,8 @@
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
   var still = function () { return reduceMotion.matches; };
+  /* desktop renders at zoom 0.9 (see site.css): rects are in screen px, CSS lengths are not */
+  var Z = function () { return parseFloat(getComputedStyle(doc).zoom) || 1; };
 
   /* ---------- Theme toggle with a circular reveal ---------- */
   function applyTheme(theme) {
@@ -130,7 +132,7 @@
       var room = rot.getAttribute("data-rotate-room");
       var max = room ? rot.closest(room).parentNode.getBoundingClientRect().width - (+rot.getAttribute("data-rotate-pad") || 0) : Infinity;
       off = w > max;
-      mask.style.width = off ? "" : Math.ceil(w + 2) + "px";
+      mask.style.width = off ? "" : Math.ceil(w / Z() + 2) + "px";
       mask.style.whiteSpace = off ? "" : "nowrap";
       if (off && idx !== 0) { mask.innerHTML = ""; cur = document.createElement("span"); cur.textContent = words[0]; mask.appendChild(cur); idx = 0; }
     };
@@ -233,7 +235,7 @@
 
     var flip = function (from, to, reverse) {
       var sx = from.width / to.width, sy = from.height / to.height;
-      var dx = from.left - to.left, dy = from.top - to.top;
+      var z = Z(), dx = (from.left - to.left) / z, dy = (from.top - to.top) / z;
       var a = "translate(" + dx + "px, " + dy + "px) scale(" + sx + ", " + sy + ")";
       var b = "translate(0px, 0px) scale(1, 1)";
       return big.animate({ transform: reverse ? [b, a] : [a, b], borderRadius: reverse ? ["14px", "16px"] : ["16px", "14px"] },
@@ -301,7 +303,7 @@
     var prev = root.querySelector(".arrow-btn.prev"), next = root.querySelector(".arrow-btn.next");
     var count = root.querySelector(".count");
     var step = function () {
-      var w = slides[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 18);
+      var w = slides[0].offsetWidth + parseFloat(getComputedStyle(track).columnGap || 18);
       return Math.max(1, Math.floor(track.clientWidth / w)) * w;
     };
     var update = function () {
