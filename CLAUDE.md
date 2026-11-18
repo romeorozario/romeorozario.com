@@ -48,6 +48,7 @@ Pages load `/css/site.css?v=...` and `/js/site.js?v=...`. `_headers` tells brows
 
 - Animation hooks are attributes: `data-reveal` (fade up on scroll; `="fade"` or `="scale"` variants), `data-stagger` on a parent to cascade its `data-reveal` children, `data-enter` with `style="--d: <ms>"` for hero entrance.
 - Launch badges (`.launch-badges` > `a.lbadge img`) load from the platforms (Open Launch, Product Hunt). If one fails, `js/site.js` swaps in a text chip from the alt text, so write the alt as "E-Warmup: <badge text>". They appear on the home E-Warmup experience card and in the Portfolio "Launches I've marketed" strip; add new launches to both.
+- Photo stack (`.photo-stack[data-stack]`, Music hero): stacked images; every `data-stack-every` ms (2000) the card underneath slides out from under the frame edge and lands on top. First image is the default and stays first in the HTML. Off-screen it pauses; reduced-motion shows the first image only.
 - Any image or video with `data-zoom` opens in the lightbox (videos play full size there).
 - Landing pages and UI/UX uses a compact `.bento.gallery` (3 columns desktop, 2 tablet and phone). Keep tiles small: the lightbox shows the full size. `.feature` and `.wide` span 2 columns; `.wide-sm` spans the row only on tablet and phone, to avoid a lone tile.
 - Buttons: `class="btn btn--primary|ink|ghost|outline|dark|line"` with the arrow SVG inside; add `data-magnetic` for the hover pull.

@@ -434,6 +434,47 @@
     if (img.complete && img.naturalWidth === 0) fallback(); else img.addEventListener("error", fallback);
   });
 
+  /* ---------- Photo stack: every few seconds the card underneath slides out
+     from under the stack (past the frame edge) and lands on top ---------- */
+  document.querySelectorAll("[data-stack]").forEach(function (stack) {
+    var cards = Array.prototype.slice.call(stack.children);
+    if (cards.length < 2) return;
+    var every = +stack.getAttribute("data-stack-every") || 2000;
+    var order = cards.slice();
+    var paint = function () { order.forEach(function (c, i) { c.style.zIndex = String(order.length - i); }); };
+    paint();
+    if (still() || !stack.animate) return;
+    var visible = true, busy = false, timer = 0;
+    var EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
+    var cycle = function () {
+      if (busy || !visible || document.hidden) return schedule();
+      busy = true;
+      var top = order[0], next = order[1];
+      /* 1: the next card slides out from under the bottom-right edge */
+      var out = next.animate(
+        [{ transform: "translate3d(0,0,0) rotate(0deg)" }, { transform: "translate3d(44%, 3%, 0) rotate(4deg)" }],
+        { duration: 520, easing: "cubic-bezier(0.33, 0, 0.2, 1)", fill: "forwards" });
+      top.animate([{ transform: "scale(1)" }, { transform: "scale(0.96)" }], { duration: 520, easing: EASE, fill: "forwards" });
+      out.finished.then(function () {
+        /* 2: it moves to the front and settles into place */
+        order.push(order.shift());
+        order.splice(order.indexOf(next), 1); order.unshift(next);
+        paint();
+        var back = next.animate(
+          [{ transform: "translate3d(44%, 3%, 0) rotate(4deg)" }, { transform: "translate3d(0,0,0) rotate(0deg)" }],
+          { duration: 640, easing: EASE, fill: "forwards" });
+        top.animate([{ transform: "scale(0.96)" }, { transform: "scale(1)" }], { duration: 640, easing: EASE, fill: "forwards" });
+        back.finished.then(function () {
+          cards.forEach(function (c) { c.getAnimations().forEach(function (a) { a.cancel(); }); });
+          busy = false; schedule();
+        });
+      });
+    };
+    var schedule = function () { clearTimeout(timer); timer = setTimeout(cycle, every); };
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(stack);
+    timer = setTimeout(cycle, every + 1400);
+  });
+
   /* ---------- Footer year ---------- */
   document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();
