@@ -478,6 +478,44 @@
     timer = setTimeout(cycle, firstHold + 1000);
   });
 
+  /* ---------- Gallery pager: swipe or arrows between two-row photo pages ---------- */
+  document.querySelectorAll("[data-gpager]").forEach(function (root) {
+    var track = root.querySelector(".gp-track");
+    var pages = Array.prototype.slice.call(track.children);
+    var section = root.closest("section") || document;
+    var prev = section.querySelector("[data-gp-prev]"), next = section.querySelector("[data-gp-next]");
+    var count = section.querySelector("[data-gp-count]");
+    var cur = -1;
+    var index = function () { return Math.round(track.scrollLeft / Math.max(1, track.clientWidth)); };
+    var update = function () {
+      var i = Math.max(0, Math.min(pages.length - 1, index()));
+      if (prev) prev.disabled = i === 0;
+      if (next) next.disabled = i === pages.length - 1;
+      if (count) count.textContent = (i + 1) + " / " + pages.length;
+      if (i !== cur) {
+        cur = i;
+        track.style.height = pages[i].offsetHeight + "px";
+        pages.forEach(function (p, n) { p.inert = n !== i; });
+      }
+    };
+    var go = function (d) {
+      var i = Math.max(0, Math.min(pages.length - 1, index() + d));
+      track.scrollTo({ left: i * track.clientWidth, behavior: still() ? "auto" : "smooth" });
+    };
+    if (prev) prev.addEventListener("click", function () { go(-1); });
+    if (next) next.addEventListener("click", function () { go(1); });
+    track.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight") { e.preventDefault(); go(1); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); }
+    });
+    var raf = 0;
+    track.addEventListener("scroll", function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
+    var refit = function () { cur = -1; update(); };
+    addEventListener("resize", refit);
+    pages.forEach(function (p) { p.querySelectorAll("img").forEach(function (im) { if (!im.complete) im.addEventListener("load", refit, { once: true }); }); });
+    update();
+  });
+
   /* ---------- Footer year ---------- */
   document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();
