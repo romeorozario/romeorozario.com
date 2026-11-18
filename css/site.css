@@ -754,8 +754,6 @@ a.ccard:hover .cover img { transform: scale(1.05); }
 .motion-row figure { min-width: 0; display: flex; flex-direction: column; gap: 12px; }
 .motion-row video { width: 100%; border-radius: 18px; background: #0B0F0D; box-shadow: 0 20px 44px rgba(11, 21, 48, 0.25); }
 .motion-row figcaption { font-family: var(--display); font-size: 17px; line-height: 1.3; font-weight: 700; }
-.reels-note { margin-top: -18px; font-size: 14.5px; color: var(--body); }
-.motion-row.reels figure { max-width: 236px; }
 
 /* Ads */
 .ads-wall { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 22px; }
@@ -1000,7 +998,6 @@ a.ccard:hover .cover img { transform: scale(1.05); }
   .motion-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 14px; }
   .motion-row figure.wide { grid-column: span 2; }
   .motion-row figcaption { font-size: 15px; }
-  .motion-row.reels figure { max-width: none; }
   .ads-wall { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
   .ads-wall img { height: auto; width: 100% !important; }
   .bento { grid-template-columns: 1fr; grid-auto-rows: auto; }

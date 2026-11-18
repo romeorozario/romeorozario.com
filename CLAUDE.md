@@ -55,7 +55,7 @@ Pages load `/css/site.css?v=...` and `/js/site.js?v=...`. `_headers` tells brows
 - Buttons: `class="btn btn--primary|ink|ghost|outline|dark|line"` with the arrow SVG inside; add `data-magnetic` for the hover pull.
 - Text content stays in the HTML (good for SEO and AI crawlers). Animations are progressive enhancement and respect `prefers-reduced-motion`.
 - Images live in `images/` by type (`site`, `brand-logos`, `blog-covers`, `social-media-designs`, `ad-creatives`, `ui-ux`, `seo-analytics`, `email-designs`, `music`, `certificates`). Use `.webp`, include `width` and `height`, and `loading="lazy"` below the fold.
-- Creator reels (on-camera product demos and deal pitches) live in `videos/creator-reels/`: a `*-web.mp4` (720x1280) plus poster for the page, and a full-quality archive copy (`*-1080p.mp4` / `*-720p.mp4`, kept under 25 MiB with a two-pass bitrate encode). They sit in the Portfolio "Creator reels" row under Motion graphics.
+- Creator reels (on-camera product demos and deal pitches) live in `videos/creator-reels/`: a `*-web.mp4` (720x1280) plus poster for the page, and a full-quality archive copy (`*-1080p.mp4` / `*-720p.mp4`, kept under 25 MiB with a two-pass bitrate encode). They sit in the second Motion graphics row, next to the GetGenie sale graphics, at the same 168px width as the other 9:16 videos.
 - Videos live in `videos/`. Pages use the compressed `*-web.mp4` versions with a poster image; the full-size originals are kept for reference only.
 - Writing style: conversational, data-driven, no em dashes.
 - Accent gradient: cobalt #2F4BFF to brand orange #FF6B2C only (`--accent-grad`, blended in oklab where supported). No purple or pink stops. Buttons stay solid.
