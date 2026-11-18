@@ -439,7 +439,10 @@
   document.querySelectorAll("[data-stack]").forEach(function (stack) {
     var cards = Array.prototype.slice.call(stack.children);
     if (cards.length < 2) return;
-    var every = +stack.getAttribute("data-stack-every") || 2000;
+    var every = +stack.getAttribute("data-stack-every") || 3000;
+    /* the first (original) photo holds longer each time it is on top */
+    var firstHold = +stack.getAttribute("data-stack-first") || every;
+    var hold = function () { return order[0] === cards[0] ? firstHold : every; };
     var order = cards.slice();
     var paint = function () { order.forEach(function (c, i) { c.style.zIndex = String(order.length - i); }); };
     paint();
@@ -453,8 +456,8 @@
       /* 1: the next card slides out from under the bottom-right edge */
       var out = next.animate(
         [{ transform: "translate3d(0,0,0) rotate(0deg)" }, { transform: "translate3d(44%, 3%, 0) rotate(4deg)" }],
-        { duration: 520, easing: "cubic-bezier(0.33, 0, 0.2, 1)", fill: "forwards" });
-      top.animate([{ transform: "scale(1)" }, { transform: "scale(0.96)" }], { duration: 520, easing: EASE, fill: "forwards" });
+        { duration: 750, easing: "cubic-bezier(0.33, 0, 0.2, 1)", fill: "forwards" });
+      top.animate([{ transform: "scale(1)" }, { transform: "scale(0.96)" }], { duration: 750, easing: EASE, fill: "forwards" });
       out.finished.then(function () {
         /* 2: it moves to the front and settles into place */
         order.push(order.shift());
@@ -462,17 +465,17 @@
         paint();
         var back = next.animate(
           [{ transform: "translate3d(44%, 3%, 0) rotate(4deg)" }, { transform: "translate3d(0,0,0) rotate(0deg)" }],
-          { duration: 640, easing: EASE, fill: "forwards" });
-        top.animate([{ transform: "scale(0.96)" }, { transform: "scale(1)" }], { duration: 640, easing: EASE, fill: "forwards" });
+          { duration: 900, easing: EASE, fill: "forwards" });
+        top.animate([{ transform: "scale(0.96)" }, { transform: "scale(1)" }], { duration: 900, easing: EASE, fill: "forwards" });
         back.finished.then(function () {
           cards.forEach(function (c) { c.getAnimations().forEach(function (a) { a.cancel(); }); });
           busy = false; schedule();
         });
       });
     };
-    var schedule = function () { clearTimeout(timer); timer = setTimeout(cycle, every); };
+    var schedule = function () { clearTimeout(timer); timer = setTimeout(cycle, hold()); };
     if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(stack);
-    timer = setTimeout(cycle, every + 1400);
+    timer = setTimeout(cycle, firstHold + 1000);
   });
 
   /* ---------- Footer year ---------- */
