@@ -1215,6 +1215,28 @@ a.ccard:hover .cover img { transform: scale(1.05); }
   .edu li { font-size: 10.5px; padding: 3px 8px; }
 }
 
+/* ---------- Phones: hero polish (iPhone-size screens) ---------- */
+@media (max-width: 680px) {
+  /* hero buttons: same width, stacked, so the pair looks deliberate */
+  .hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; padding-top: 2px; }
+  .hero-ctas .btn { width: 100%; min-height: 50px; font-size: 15px; }
+  /* small labels stay on one line */
+  .chip { font-size: 10.5px; letter-spacing: 0.08em; padding: 7px 12px; gap: 8px; }
+  /* Portfolio intro: smaller, centred photo with an even frame */
+  .intro { padding: 32px 0 28px; }
+  .intro-grid { gap: 40px; }
+  .intro-photo { width: 72%; max-width: 280px; margin: 0 auto; transform: translateX(-8px); }
+  .intro-photo::before { inset: 14px 14px -14px -14px; border-radius: 24px; }
+  .intro-photo img { border-radius: 24px; }
+  /* the role is a label, not a button: soft tint, smaller type */
+  .intro-copy > .badge {
+    padding: 6px 12px; font-size: 13px; font-weight: 600;
+    background: color-mix(in oklab, var(--orange) 14%, var(--surf)); color: var(--orange-text);
+    border: 1px solid color-mix(in oklab, var(--orange) 35%, transparent);
+  }
+  [data-theme="dark"] .intro-copy > .badge { color: var(--orange); }
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; transition-delay: 0s !important; scroll-behavior: auto !important; }
