@@ -532,6 +532,7 @@ button { font: inherit; color: inherit; }
 .site-footer .wrap { display: flex; flex-direction: column; gap: 40px; }
 .footer-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px; }
 .footer-top .name { font-family: var(--serif); font-weight: 700; font-size: 30px; letter-spacing: 0.005em; }
+.footer-top .trio { font-family: var(--serif); font-style: italic; font-size: 19px; line-height: 1.2; color: var(--text); margin-top: -4px; }
 .footer-top .tag { color: var(--muted); }
 .footer-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 48px; font-size: 15px; }
 .footer-nav a, .footer-social a { text-decoration: none; transition: color 0.3s ease; }
