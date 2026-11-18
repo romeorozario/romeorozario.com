@@ -24,7 +24,7 @@ Every page shares the same header, footer, `<head>` setup (theme script, Google 
 
 ## Shared files
 
-Pages load `/css/site.css?v=...` and `/js/site.js?v=...`. `_headers` tells browsers to cache CSS and JS for a year, so bump the `v=` value in all five pages whenever you change either file, or visitors keep seeing the old version. Images and videos cache for a day and then refresh in the background (stale-while-revalidate, 30 days); if you replace an image in place, visitors may see the old one once before it updates, so give significantly changed images a new filename.
+Pages load `/css/site.css?v=...` and `/js/site.js?v=...`. `_headers` tells browsers to cache CSS and JS for a year, so bump the `v=` value in all five pages whenever you change either file, or visitors keep seeing the old version. After merging, don't request the new `?v=` URL until the deploy is confirmed (check with an extra throwaway query string first): Cloudflare's edge caches whatever it gets first under that URL for a year, even if it's the old file. Images and videos cache for a day and then refresh in the background (stale-while-revalidate, 30 days); if you replace an image in place, visitors may see the old one once before it updates, so give significantly changed images a new filename.
 
 
 - `css/site.css`: design tokens at the top (`:root` for light, `[data-theme="dark"]` for dark), then home sections, then inner-page sections, then responsive rules (breakpoints 1180px, 1060px, 680px) and reduced-motion rules.
