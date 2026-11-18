@@ -522,6 +522,8 @@ button { font: inherit; color: inherit; }
 .lightbox[open] { display: flex; }
 .lightbox::backdrop { background: rgba(7, 12, 26, 0); -webkit-backdrop-filter: blur(0); backdrop-filter: blur(0); transition: background-color 0.45s var(--ease), backdrop-filter 0.45s var(--ease); }
 .lightbox.is-open::backdrop { background: rgba(7, 12, 26, 0.86); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.lightbox video { max-width: min(1200px, 92vw); max-height: 86vh; width: auto; height: auto; border-radius: 14px; background: #000; box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55); transform-origin: 0 0; }
+.lightbox video[hidden], .lightbox img[hidden] { display: none; }
 .lightbox img {
   max-width: min(1200px, 92vw); max-height: 86vh; width: auto; height: auto; object-fit: contain; border-radius: 14px;
   box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55); cursor: zoom-out; transform-origin: 0 0;
@@ -757,6 +759,15 @@ a.ccard:hover .cover img { transform: scale(1.05); }
 .topper .zoomed img { width: 100%; height: 100%; object-fit: cover; }
 .topper > img { width: 100%; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.14); }
 
+/* Compact gallery (Landing pages, web and UI/UX): small tiles that open full size in the lightbox */
+.bento.gallery { --cols: 3; grid-auto-rows: clamp(150px, 15.5vw, 210px); gap: 12px; }
+.bento.gallery > figure { border-radius: 18px; }
+.bento.gallery .fill { width: 100%; height: 100%; object-fit: cover; }
+.bento.gallery video.fill { display: block; object-position: left top; cursor: zoom-in; background: #0B0F0D; }
+.bento.gallery .bchip { left: 10px; bottom: 10px; right: auto; max-width: calc(100% - 20px); padding: 5px 10px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bento.gallery .topper { padding: 12px 12px 42px; gap: 8px; }
+.bento.gallery .topper .zoomed { height: 52px; border-radius: 10px; }
+
 /* Email */
 .flows { padding: 24px 26px; border-radius: 22px; background: var(--surf); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 18px; }
 .flows-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
@@ -916,6 +927,9 @@ a.ccard:hover .cover img { transform: scale(1.05); }
   .arrow-btn.next { right: -12px; }
 }
 @media (max-width: 1060px) {
+  .bento.gallery { --cols: 2; grid-auto-rows: clamp(140px, 24vw, 220px); }
+  /* the 7th small tile would sit alone in 2 columns: let it span the row */
+  .bento.gallery > figure.wide-sm { grid-column: span 2 !important; }
   .intro-grid { grid-template-columns: 1fr; gap: 48px; }
   .intro-photo { max-width: 380px; margin-left: 22px; }
   .pf-head { grid-template-columns: 1fr; }
@@ -952,6 +966,11 @@ a.ccard:hover .cover img { transform: scale(1.05); }
   .bento > figure.tall { height: 540px; }
   .bento > figure.tall .fill, .bento > figure.tall .contain { height: 100%; }
   .bento > figure.tall .fit { height: 100%; }
+  .bento.gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; gap: 10px; }
+  .bento.gallery > figure, .bento.gallery > figure.tall { height: auto; aspect-ratio: 4 / 3; }
+  .bento.gallery > figure.wide, .bento.gallery > figure.feature, .bento.gallery > figure.wide-sm { grid-column: span 2 !important; aspect-ratio: 16 / 9; }
+  .bento.gallery .fill { height: 100%; }
+  .bento.gallery .bchip { font-size: 11px; padding: 4px 8px; left: 8px; bottom: 8px; max-width: calc(100% - 16px); }
   .pager { padding-bottom: 76px; }
   .pager .arrow-btn { top: auto; bottom: 0; margin-top: 0; }
   .pager .arrow-btn.prev { left: calc(50% - 58px); }

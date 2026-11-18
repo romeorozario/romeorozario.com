@@ -37,7 +37,8 @@ Every page shares the same header, footer, `<head>` setup (theme script, Google 
 - Theme: every new visit opens in light mode. The toggle switches to dark, and that choice is kept in `sessionStorage` only, so it lasts while the visitor browses this session and resets to light next time. The pre-paint script in each page's `<head>` and `applyTheme` in `js/site.js` implement this; keep them in sync.
 
 - Animation hooks are attributes: `data-reveal` (fade up on scroll; `="fade"` or `="scale"` variants), `data-stagger` on a parent to cascade its `data-reveal` children, `data-enter` with `style="--d: <ms>"` for hero entrance.
-- Any image with `data-zoom` opens in the lightbox.
+- Any image or video with `data-zoom` opens in the lightbox (videos play full size there).
+- Landing pages and UI/UX uses a compact `.bento.gallery` (3 columns desktop, 2 tablet and phone). Keep tiles small: the lightbox shows the full size. `.feature` and `.wide` span 2 columns; `.wide-sm` spans the row only on tablet and phone, to avoid a lone tile.
 - Buttons: `class="btn btn--primary|ink|ghost|outline|dark|line"` with the arrow SVG inside; add `data-magnetic` for the hover pull.
 - Text content stays in the HTML (good for SEO and AI crawlers). Animations are progressive enhancement and respect `prefers-reduced-motion`.
 - Images live in `images/` by type (`site`, `brand-logos`, `blog-covers`, `social-media-designs`, `ad-creatives`, `ui-ux`, `seo-analytics`, `email-designs`, `music`, `certificates`). Use `.webp`, include `width` and `height`, and `loading="lazy"` below the fold.
