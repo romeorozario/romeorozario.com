@@ -33,7 +33,7 @@ Every page shares the same header, footer, `<head>` setup (theme script, Google 
 - Phones (680px and below): two cards per row wherever a card fits (Start here, What I do, Experience, blogs, contact, portfolio blog cards, emails, bento grids, blog pager, bands, YouTube, Spotify, education). One per row only for wide content. An odd last bento tile spans the row. The phone rules sit in the "Phones: denser layout" block near the end of `css/site.css`.
 
 - Rotating words: add `data-rotate="word|word|word"` to a span whose text is the first word (it stays in the HTML for SEO). Optional `data-rotate-every` and `data-rotate-start` in ms. The home headline cycles matter. > rank. > convert. > grow. > shine. It pauses off-screen and stays still for reduced-motion visitors.
-- Punchline: `.punch` under the hero headline is italic Unna, with `.king` in the cobalt-to-orange `--accent-grad` and an orange `.crown` that drops in. Home: "Growth happens with content. And content? Still king." Portfolio: "Every growth story on this page starts with content. Long live the king."
+- Punchline: `.punch` under the hero headline is italic Unna, with `.king` in the cobalt-to-orange `--accent-grad` and an orange `.crown` that drops in. Home: "Growth happens with content. And content? Still king." Home page only.
 
 - Brand: the header shows "Romeo Nicholas Rozario" in Unna (`--serif`) inside a pill, with "Rozario" in `--accent-grad` (`.grad`): a cobalt (#2F4BFF) to orange (#FF6B2C) gradient that glides to orange-to-blue on hover. "Nicholas" (`.mid`) hides on phones. The footer name uses the same style.
 
