@@ -99,6 +99,14 @@
   [data-theme="dark"] { --accent-grad: linear-gradient(in oklab 90deg, #8EA0FF 0%, #FF8A57 50%, #8EA0FF 100%); }
 }
 
+/* ---------- Desktop scale ----------
+   On desktop everything renders at 90%, the same as browser zoom at 90%.
+   js/site.js corrects for this wherever it turns a measurement into a CSS
+   length (Z()). Tablets and phones are untouched. */
+@media (min-width: 1061px) {
+  html { zoom: 0.9; }
+}
+
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + 16px); }
@@ -1045,6 +1053,142 @@ a.ccard:hover .cover img { transform: scale(1.05); }
   [data-theme="dark"] .logo-wall { padding: 24px 20px; margin: 0; }
   .contact-panel { padding: 36px 22px; border-radius: 28px; }
   .about .wrap { gap: 36px; }
+}
+
+/* ---------- Phones: denser layout, two cards per row where a card fits ---------- */
+@media (max-width: 680px) {
+  /* Home: Start here */
+  .start-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .start-card { min-height: 220px; padding: 16px; border-radius: 20px; gap: 10px; }
+  .start-card img { height: 62%; }
+  .start-card .t { gap: 4px; }
+  .start-card .t b { font-size: 19px; }
+  .start-card .t span { font-size: 12.5px; line-height: 1.4; }
+  .pill { min-height: 34px; padding: 0 12px; font-size: 12px; gap: 5px; }
+  .pill svg { width: 12px; height: 12px; }
+
+  /* Home: Selected work (the three small cards sit 2 + 1) */
+  .work-grid { gap: 12px; }
+  .work-card { padding: 14px; border-radius: 20px; gap: 8px; }
+  .work-card.span-4 { grid-column: span 6; }
+  .work-card.span-4:last-child { grid-column: span 12; }
+  .work-card.span-4 .shot { height: 110px !important; border-radius: 12px; }
+  .work-card.span-4 h3 { font-size: 15px; }
+  .work-card.span-4 .label { font-size: 10px; }
+  .work-card.span-4 .wstats { gap: 12px; }
+  .work-card.span-4 .wstats b { font-size: 18px; }
+  .work-card.span-4 .wstats span { font-size: 11px; }
+  .work-card .btn--sm { min-height: 38px; padding: 0 14px; font-size: 13px; }
+
+  /* Home: What I do */
+  .svc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .svc { padding: 16px 14px 14px; border-radius: 18px; gap: 8px; }
+  .svc h3 { font-size: 16px; }
+  .svc p { font-size: 13px; line-height: 1.45; }
+  .svc .go { font-size: 12.5px; }
+
+  /* Home: Experience */
+  .exp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .exp-card { padding: 12px; border-radius: 16px; gap: 6px; }
+  .exp-top { min-height: 28px; gap: 6px; }
+  .plate { height: 28px; padding: 0 8px; margin-left: -8px; }
+  .plate img { height: 16px; max-width: 96px; }
+  .exp-card .visit { min-height: 28px; padding: 0 8px; font-size: 0; gap: 0; }
+  .exp-card .visit svg { width: 14px; height: 14px; }
+  .exp-card .role { font-size: 9px; letter-spacing: 0.05em; }
+  .exp-card h3 { font-size: 14px; }
+  .exp-card .desc { font-size: 12px; -webkit-line-clamp: 3; }
+  .estats { gap: 4px 12px; }
+  .estats b { font-size: 15px; }
+  .estats span { font-size: 10.5px; }
+  .exp-card .chips span { font-size: 10.5px; padding: 3px 7px; }
+
+  /* Home: latest blogs (one wide, two side by side) */
+  .blog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .blog-grid .post:first-child { grid-column: span 2; }
+  .post { padding: 8px 8px 14px; gap: 8px; border-radius: 16px; }
+  .post .meta { padding: 0 4px; font-size: 11.5px; }
+  .post .title { padding: 0 4px; font-size: 14px; }
+  .blog-grid .post:first-child .title { font-size: 18px; }
+
+  /* Contact: two per row, icon above the handle */
+  .contact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .contact-grid a { flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px; }
+  .contact-grid li:first-child a { flex-direction: row; align-items: center; }
+  .contact-grid .ci { flex-basis: 34px; width: 34px; height: 34px; border-radius: 10px; }
+  .contact-grid .ci svg { width: 16px; height: 16px; }
+  .contact-grid .ct > span { font-size: 11.5px; }
+  .contact-grid b { font-size: 12.5px; overflow-wrap: anywhere; }
+
+  /* Portfolio */
+  .ccards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .ccard { padding: 6px 6px 10px; gap: 6px; border-radius: 14px; }
+  .ccard .pub { font-size: 10.5px; padding: 0 4px; }
+  .ccard .title { font-size: 12.5px; padding: 0 4px; }
+  .ccard .tag { font-size: 10px; margin: 0 4px; }
+  .slide { flex-basis: calc((100% - 18px) / 2.15); }
+  .email-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .email-grid figcaption span { font-size: 11px; }
+  .email-grid figcaption b { font-size: 13px; }
+  .bento:not(.gallery) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .bento:not(.gallery) > figure { border-radius: 16px; }
+  .bento:not(.gallery) > figure.tall { height: 300px; }
+  .bento:not(.gallery) .fit { min-height: 130px; padding: 8px 8px 40px; }
+  .bento:not(.gallery) .bchip { font-size: 10.5px; padding: 4px 8px; left: 8px; right: auto; bottom: 8px; max-width: calc(100% - 16px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bento:not(.gallery) > figure:last-child:nth-child(odd) { grid-column: span 2 !important; }
+  .panel-stats { padding: 14px 12px; gap: 10px; }
+  .panel-stats b { font-size: 22px; }
+  .panel-stats span { font-size: 11.5px; }
+  .panel-text { padding: 14px 12px 44px; gap: 4px; }
+  .panel-text b { font-size: 28px; }
+  .panel-text strong { font-size: 14px; }
+  .panel-text span { font-size: 11.5px; }
+
+  /* Blogs page */
+  .pager-page { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .bcard { padding: 6px 6px 12px; gap: 8px; border-radius: 16px; }
+  .bcard .pub { font-size: 10px; padding: 0 4px; letter-spacing: 0.06em; }
+  .bcard .title { font-size: 13px; padding: 0 4px; }
+  .bcard .date { font-size: 11px; padding: 0 4px; }
+
+  /* Music */
+  .band-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .band-card { border-radius: 18px; }
+  .band-card .photo { height: 120px; }
+  .band-card .band-body { padding: 12px; gap: 8px; }
+  .band-card .band-body .row { gap: 8px; }
+  .band-card .band-body .logo { width: 34px; height: 34px; border-radius: 8px; }
+  .band-card .band-body h3 { font-size: 18px; }
+  .band-card .genre { font-size: 11px; }
+  .band-card .band-body > p { font-size: 12.5px; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+  .band-card .band-links { gap: 6px; }
+  .band-card .band-links a { min-height: 30px; padding: 0 10px; font-size: 11.5px; }
+  .releases { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: dense; gap: 10px; }
+  .releases .release:nth-child(2) { grid-column: span 2; }
+  .release { padding: 16px; gap: 10px; border-radius: 16px; }
+  .release b { font-size: 16px; }
+  .release span { font-size: 12px; }
+  .yt-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .yt .frame { border-radius: 14px; }
+  .yt .play { width: 48px; height: 34px; margin: -17px 0 0 -24px; border-radius: 10px; }
+  .yt .who { font-size: 11px; }
+  .yt .what { font-size: 13px; }
+  .sp-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .sp { flex-direction: column; align-items: flex-start; gap: 8px; padding: 10px; }
+  .sp img { width: 100%; height: auto; aspect-ratio: 1; }
+  .sp b { font-size: 14px; }
+  .sp small { display: none; }
+  .sp .go { font-size: 11px; padding: 5px 8px; }
+
+  /* Qualifications */
+  .edu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .edu, .edu.big { padding: 14px; border-radius: 18px; gap: 6px; }
+  .edu h3, .edu.big h3 { font-size: 15px; }
+  .edu .yr { font-size: 11px; }
+  .edu .school { font-size: 13px; line-height: 1.35; }
+  .edu .place { font-size: 12px; }
+  .edu ul { gap: 5px; }
+  .edu li { font-size: 10.5px; padding: 3px 8px; }
 }
 
 /* ---------- Reduced motion ---------- */
