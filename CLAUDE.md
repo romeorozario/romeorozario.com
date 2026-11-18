@@ -16,7 +16,7 @@ Cloudflare Pages serves clean URLs: `/portfolio`, `/blog`, `/music`, `/education
 |---|---|---|
 | About Me (home) | `index.html` | Hero, stats, Start here cards, logo wall, Selected work bento, What I do, Experience, About, latest Blogs, Contact |
 | My Portfolio | `portfolio.html` | One page with a sticky "Jump to" nav. Sections in order: `#blogs`, `#social`, `#ads`, `#lp-web`, `#seo`, `#email` |
-| Blogs | `blog.html` | Professional blogs in pages of 8 (`.pager-page` blocks), then the personal journal teaser |
+| Blogs | `blog.html` | Hero heading "Written by Me". Professional blogs in pages of 8 (`.pager-page` blocks, 5 or 6 pages, no page counter), then the personal journal teaser |
 | Music | `music.html` | Bands, releases, YouTube and Spotify (click-to-play), on-stage gallery |
 | Qualifications | `education.html` | Degrees, certificates, beyond marketing |
 
@@ -60,7 +60,8 @@ Pages load `/css/site.css?v=...` and `/js/site.js?v=...`. `_headers` tells brows
 - Videos live in `videos/`. Pages use the compressed `*-web.mp4` versions with a poster image; the full-size originals are kept for reference only.
 - Writing style: conversational, data-driven, no em dashes.
 - Accent gradient: cobalt #2F4BFF to brand orange #FF6B2C only (`--accent-grad`, blended in oklab where supported). No purple or pink stops. Buttons stay solid.
-- No decorative numbering ("01 /", "02", step counters) on labels, nav pills or cards. It reads as templated.
+- No decorative numbering ("01 /", "02", step counters) on labels, nav pills or cards. It reads as templated. No page counters ("1 / 5") on pagers or galleries either.
+- Qualifications: never show university GPA/CGPA (private). Credits are fine.
 - When adding a page, add it to the nav and footer in every file and to `sitemap.xml`.
 
 ## SEO

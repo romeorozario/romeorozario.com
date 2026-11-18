@@ -946,9 +946,9 @@ a.ccard:hover .cover img { transform: scale(1.05); }
 
 /* ---------- Qualifications page ---------- */
 .q-grid { grid-template-columns: 1.3fr 1fr; align-items: end; }
-.qstats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.qstats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .qstats > div { padding: 20px 22px; border-radius: 20px; background: var(--surf); border: 1px solid var(--line); box-shadow: var(--card-shadow); }
-.qstats > div:first-child { grid-column: span 3; }
+.qstats > div:first-child { grid-column: span 2; }
 .qstats dt { font-size: 13px; color: var(--muted); }
 .qstats dd { margin-top: 4px; font-family: var(--display); font-size: 30px; line-height: 1.05; font-weight: 800; letter-spacing: -0.02em; color: var(--text); }
 .qstats dd.c-link { color: var(--link); }
