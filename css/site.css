@@ -396,6 +396,23 @@ button { font: inherit; color: inherit; }
 .work-card .more { margin-top: auto; padding-top: 4px; }
 .work-card .wstats ~ .more { margin-top: 0; }
 
+/* ---------- Launch badges (Product Hunt, Open Launch) ----------
+   Loaded from the platforms; js/site.js swaps in a text chip if one fails to load. */
+.launch-badges { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.lbadge { display: inline-flex; border-radius: 10px; transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease); }
+.lbadge:hover { transform: translateY(-2px); box-shadow: 0 10px 22px -12px rgba(11, 21, 48, 0.45); }
+.lbadge img { height: 34px; width: auto; display: block; }
+.launch-badges.big .lbadge img { height: 50px; }
+.lbadge.is-text { padding: 5px 10px; border: 1px solid var(--line); background: var(--bg); font-size: 12px; font-weight: 600; color: var(--body); text-decoration: none; }
+.launches { padding: 0 0 48px; }
+.launches-box {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 32px;
+  padding: 22px 26px; border-radius: 22px; background: var(--surf); border: 1px solid var(--line); box-shadow: var(--card-shadow);
+}
+.launches-copy { flex: 1 1 380px; display: flex; flex-direction: column; gap: 8px; }
+.launches-copy p { font-size: 15.5px; color: var(--body); max-width: 620px; }
+.launches-copy b { color: var(--text); }
+
 /* ---------- What I do ---------- */
 .services { background: var(--surf); padding: 64px 0; }
 .services .wrap { display: flex; flex-direction: column; gap: 36px; }
@@ -1102,6 +1119,9 @@ a.ccard:hover .cover img { transform: scale(1.05); }
   .estats b { font-size: 15px; }
   .estats span { font-size: 10.5px; }
   .exp-card .chips span { font-size: 10.5px; padding: 3px 7px; }
+  .exp-card .lbadge img { height: 26px; }
+  .launch-badges.big .lbadge img { height: 42px; }
+  .launches-box { padding: 16px; }
 
   /* Home: latest blogs (one wide, two side by side) */
   .blog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }

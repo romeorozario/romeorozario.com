@@ -422,6 +422,16 @@
     vids.forEach(function (v) { vio.observe(v); });
   }
 
+  /* ---------- Launch badges: fall back to a text chip if the platform image fails ---------- */
+  document.querySelectorAll(".lbadge img").forEach(function (img) {
+    var fallback = function () {
+      var a = img.parentNode;
+      a.classList.add("is-text");
+      a.textContent = img.alt.replace(/^E-Warmup: /, "");
+    };
+    if (img.complete && img.naturalWidth === 0) fallback(); else img.addEventListener("error", fallback);
+  });
+
   /* ---------- Footer year ---------- */
   document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();

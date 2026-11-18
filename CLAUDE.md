@@ -40,6 +40,7 @@ Every page shares the same header, footer, `<head>` setup (theme script, Google 
 - Theme: every new visit opens in light mode. The toggle switches to dark, and that choice is kept in `sessionStorage` only, so it lasts while the visitor browses this session and resets to light next time. The pre-paint script in each page's `<head>` and `applyTheme` in `js/site.js` implement this; keep them in sync.
 
 - Animation hooks are attributes: `data-reveal` (fade up on scroll; `="fade"` or `="scale"` variants), `data-stagger` on a parent to cascade its `data-reveal` children, `data-enter` with `style="--d: <ms>"` for hero entrance.
+- Launch badges (`.launch-badges` > `a.lbadge img`) load from the platforms (Open Launch, Product Hunt). If one fails, `js/site.js` swaps in a text chip from the alt text, so write the alt as "E-Warmup: <badge text>". They appear on the home E-Warmup experience card and in the Portfolio "Launches I've marketed" strip; add new launches to both.
 - Any image or video with `data-zoom` opens in the lightbox (videos play full size there).
 - Landing pages and UI/UX uses a compact `.bento.gallery` (3 columns desktop, 2 tablet and phone). Keep tiles small: the lightbox shows the full size. `.feature` and `.wide` span 2 columns; `.wide-sm` spans the row only on tablet and phone, to avoid a lone tile.
 - Buttons: `class="btn btn--primary|ink|ghost|outline|dark|line"` with the arrow SVG inside; add `data-magnetic` for the hover pull.
