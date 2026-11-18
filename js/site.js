@@ -500,7 +500,6 @@
       if (count) count.textContent = (i + 1) + " / " + pages.length;
       if (i !== cur) {
         cur = i;
-        track.style.height = pages[i].offsetHeight + "px";
         pages.forEach(function (p, n) { p.inert = n !== i; });
       }
     };
@@ -534,10 +533,16 @@
     });
     var raf = 0;
     track.addEventListener("scroll", function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
-    var refit = function () { cur = -1; update(); };
+    /* one fixed height for every page (the tallest), so content below never shifts */
+    var fit = function () {
+      track.style.height = "";
+      var h = 0; pages.forEach(function (p) { h = Math.max(h, p.offsetHeight); });
+      track.style.height = h + "px";
+    };
+    var refit = function () { fit(); cur = -1; update(); };
     addEventListener("resize", refit);
     pages.forEach(function (p) { p.querySelectorAll("img").forEach(function (im) { if (!im.complete) im.addEventListener("load", refit, { once: true }); }); });
-    update();
+    fit(); update();
   });
 
   /* ---------- Footer year ---------- */
