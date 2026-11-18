@@ -587,6 +587,9 @@ button { font: inherit; color: inherit; }
 /* Theme switch: circular reveal instead of the page cross-fade */
 html.theme-vt::view-transition-old(root),
 html.theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+/* lights out: the old (light) page sits on top and shrinks into the toggle */
+html.theme-vt-out::view-transition-old(root) { z-index: 2; }
+html.theme-vt-out::view-transition-new(root) { z-index: 1; }
 
 /* =====================================================================
    Inner pages: Portfolio, Blogs, Music, Qualifications

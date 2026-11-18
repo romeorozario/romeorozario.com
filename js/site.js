@@ -33,15 +33,23 @@
       var r = btn.getBoundingClientRect();
       var x = r.left + r.width / 2, y = r.top + r.height / 2;
       var radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+      /* to light: light beams out of the toggle. To dark: the light shrinks from the
+         screen edges back into the toggle, like the lights going out. */
+      var toDark = next === "dark";
+      var small = "circle(0px at " + x + "px " + y + "px)", full = "circle(" + radius + "px at " + x + "px " + y + "px)";
       doc.classList.add("theme-vt");
+      doc.classList.toggle("theme-vt-out", toDark);
       var t = document.startViewTransition(function () { applyTheme(next); });
       t.ready.then(function () {
-        doc.animate(
-          { clipPath: ["circle(0px at " + x + "px " + y + "px)", "circle(" + radius + "px at " + x + "px " + y + "px)"] },
-          { duration: 750, easing: "cubic-bezier(0.22, 1, 0.36, 1)", pseudoElement: "::view-transition-new(root)" }
-        );
+        if (toDark) {
+          doc.animate({ clipPath: [full, small] },
+            { duration: 700, easing: "cubic-bezier(0.55, 0, 0.45, 1)", fill: "forwards", pseudoElement: "::view-transition-old(root)" });
+        } else {
+          doc.animate({ clipPath: [small, full] },
+            { duration: 750, easing: "cubic-bezier(0.22, 1, 0.36, 1)", pseudoElement: "::view-transition-new(root)" });
+        }
       });
-      t.finished.finally(function () { doc.classList.remove("theme-vt"); });
+      t.finished.finally(function () { doc.classList.remove("theme-vt", "theme-vt-out"); });
     });
   });
 
