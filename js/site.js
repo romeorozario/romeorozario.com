@@ -486,7 +486,13 @@
     var prev = section.querySelector("[data-gp-prev]"), next = section.querySelector("[data-gp-next]");
     var count = section.querySelector("[data-gp-count]");
     var cur = -1;
-    var index = function () { return Math.round(track.scrollLeft / Math.max(1, track.clientWidth)); };
+    /* page positions include the gap between pages, so measure them instead of using clientWidth */
+    var pos = function (i) { return pages[i].offsetLeft - pages[0].offsetLeft; };
+    var index = function () {
+      var best = 0, d = Infinity;
+      pages.forEach(function (p, i) { var x = Math.abs(pos(i) - track.scrollLeft); if (x < d) { d = x; best = i; } });
+      return best;
+    };
     var update = function () {
       var i = Math.max(0, Math.min(pages.length - 1, index()));
       if (prev) prev.disabled = i === 0;
@@ -500,7 +506,7 @@
     };
     var go = function (d) {
       var i = Math.max(0, Math.min(pages.length - 1, index() + d));
-      track.scrollTo({ left: i * track.clientWidth, behavior: still() ? "auto" : "smooth" });
+      track.scrollTo({ left: pos(i), behavior: still() ? "auto" : "smooth" });
     };
     if (prev) prev.addEventListener("click", function () { go(-1); restart(); });
     if (next) next.addEventListener("click", function () { go(1); restart(); });
@@ -511,7 +517,7 @@
     var tick = function () {
       if (paused || !onScreen || document.hidden) return;
       var i = index();
-      track.scrollTo({ left: (i >= pages.length - 1 ? 0 : i + 1) * track.clientWidth, behavior: "smooth" });
+      track.scrollTo({ left: pos(i >= pages.length - 1 ? 0 : i + 1), behavior: "smooth" });
     };
     var restart = function () { clearInterval(auto); if (!still()) auto = setInterval(tick, every); };
     root.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") paused = true; });
