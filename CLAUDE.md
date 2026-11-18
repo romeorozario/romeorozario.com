@@ -30,9 +30,9 @@ Every page shares the same header, footer, `<head>` setup (theme script, Google 
 ## Conventions
 
 - Rotating words: add `data-rotate="word|word|word"` to a span whose text is the first word (it stays in the HTML for SEO). Optional `data-rotate-every` and `data-rotate-start` in ms. The home headline cycles matter. > rank. > convert. > grow. > shine. It pauses off-screen and stays still for reduced-motion visitors.
-- Punchline: `.punch` under the hero headline is italic Unna, with `.king` in the brand gradient and a `.crown` that drops in. Home: "Growth happens with content. And content? Still king." Portfolio: "Every growth story on this page starts with content. Long live the king."
+- Punchline: `.punch` under the hero headline is italic Unna, with `.king` in the blue-and-yellow `--accent-grad` and a yellow, blue-outlined `.crown` that drops in. Home: "Growth happens with content. And content? Still king." Portfolio: "Every growth story on this page starts with content. Long live the king."
 
-- Brand: the header shows "Romeo Nicholas Rozario" in Unna (`--serif`) inside a pill, with "Rozario" in the orange-to-violet `--accent-grad` (`.grad`). "Nicholas" (`.mid`) hides on phones. The footer name uses the same style.
+- Brand: the header shows "Romeo Nicholas Rozario" in Unna (`--serif`) inside a pill, with "Rozario" in `--accent-grad` (`.grad`): Swedish flag blue (#006AA7) with a crisp pure-yellow (#FECC02) stripe that sweeps across on hover. "Nicholas" (`.mid`) hides on phones. The footer name uses the same style.
 
 - Theme: every new visit opens in light mode. The toggle switches to dark, and that choice is kept in `sessionStorage` only, so it lasts while the visitor browses this session and resets to light next time. The pre-paint script in each page's `<head>` and `applyTheme` in `js/site.js` implement this; keep them in sync.
 
@@ -43,6 +43,7 @@ Every page shares the same header, footer, `<head>` setup (theme script, Google 
 - Images live in `images/` by type (`site`, `brand-logos`, `blog-covers`, `social-media-designs`, `ad-creatives`, `ui-ux`, `seo-analytics`, `email-designs`, `music`, `certificates`). Use `.webp`, include `width` and `height`, and `loading="lazy"` below the fold.
 - Videos live in `videos/`. Pages use the compressed `*-web.mp4` versions with a poster image; the full-size originals are kept for reference only.
 - Writing style: conversational, data-driven, no em dashes.
+- No orange-to-purple gradients. Accents use Swedish flag blue and yellow (`--accent-grad`, hard colour stops, never blended); buttons stay solid.
 - No decorative numbering ("01 /", "02", step counters) on labels, nav pills or cards. It reads as templated.
 - When adding a page, add it to the nav and footer in every file and to `sitemap.xml`.
 
