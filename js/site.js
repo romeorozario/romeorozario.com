@@ -553,6 +553,36 @@
     fit(); update();
   });
 
+  /* ---------- Logo wall: even rows on tablet and phone ----------
+     Below 1180px the three desktop rows flow as one wrapped group. Split the logos
+     into rows of near-equal size (e.g. 21 logos: 7+7+7, 5+4+4+4+4, or 3 per row)
+     so no logo ever sits alone on a row. */
+  var wallMq = window.matchMedia("(max-width: 1180px)");
+  var walls = document.querySelectorAll(".logo-wall");
+  var balanceWalls = function () {
+    walls.forEach(function (wall) {
+      var items = wall.querySelectorAll(".logo-row > li");
+      if (!wallMq.matches) { wall.classList.remove("is-balanced"); items.forEach(function (li) { li.style.removeProperty("--lw-b"); }); return; }
+      var cs = getComputedStyle(wall);
+      var w = (wall.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)) / Z();
+      var cell = innerWidth <= 680 ? 100 : 136;
+      var n = items.length, max = Math.max(2, Math.floor(w / cell));
+      var rows = Math.ceil(n / max);
+      if (n > 1 && Math.floor(n / rows) < 2) rows = Math.floor(n / 2);
+      var base = Math.floor(n / rows), extra = n % rows, i = 0;
+      for (var r = 0; r < rows; r++) {
+        var k = base + (r < extra ? 1 : 0);
+        for (var j = 0; j < k; j++, i++) items[i].style.setProperty("--lw-b", (100 / k - 0.02).toFixed(3) + "%");
+      }
+      wall.classList.add("is-balanced");
+    });
+  };
+  if (walls.length) {
+    var lwRaf = 0;
+    addEventListener("resize", function () { cancelAnimationFrame(lwRaf); lwRaf = requestAnimationFrame(balanceWalls); });
+    balanceWalls();
+  }
+
   /* ---------- Footer year ---------- */
   document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();
