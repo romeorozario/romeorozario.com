@@ -502,8 +502,26 @@
       var i = Math.max(0, Math.min(pages.length - 1, index() + d));
       track.scrollTo({ left: i * track.clientWidth, behavior: still() ? "auto" : "smooth" });
     };
-    if (prev) prev.addEventListener("click", function () { go(-1); });
-    if (next) next.addEventListener("click", function () { go(1); });
+    if (prev) prev.addEventListener("click", function () { go(-1); restart(); });
+    if (next) next.addEventListener("click", function () { go(1); restart(); });
+    /* auto-advance every data-gp-every ms (4000), looping; pauses on hover, touch,
+       keyboard focus, when off-screen or the tab is hidden, and for reduced motion */
+    var every = +root.getAttribute("data-gp-every") || 4000;
+    var auto = 0, paused = false, onScreen = true;
+    var tick = function () {
+      if (paused || !onScreen || document.hidden) return;
+      var i = index();
+      track.scrollTo({ left: (i >= pages.length - 1 ? 0 : i + 1) * track.clientWidth, behavior: "smooth" });
+    };
+    var restart = function () { clearInterval(auto); if (!still()) auto = setInterval(tick, every); };
+    root.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") paused = true; });
+    root.addEventListener("pointerleave", function () { paused = false; restart(); });
+    track.addEventListener("touchstart", function () { paused = true; }, { passive: true });
+    track.addEventListener("touchend", function () { setTimeout(function () { paused = false; restart(); }, 1500); }, { passive: true });
+    root.addEventListener("focusin", function () { paused = true; });
+    root.addEventListener("focusout", function () { paused = false; restart(); });
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { onScreen = en[0].isIntersecting; if (onScreen) restart(); }, { threshold: 0.3 }).observe(root);
+    restart();
     track.addEventListener("keydown", function (e) {
       if (e.key === "ArrowRight") { e.preventDefault(); go(1); }
       if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); }
