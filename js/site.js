@@ -591,8 +591,8 @@
     d.querySelectorAll("a").forEach(function (a) {
       a.addEventListener("click", function () {
         d.open = false;
-        /* GA4: one event per DM click, so lesson and booking leads can be counted (mark "dm_click" as a key event in GA4) */
-        if (typeof gtag === "function") gtag("event", "dm_click", { platform: a.getAttribute("data-platform") || a.hostname, placement: d.getAttribute("data-dm") || "menu" });
+        /* GA4: one event per contact click, so leads can be counted (mark "contact_click" as a key event in GA4) */
+        if (typeof gtag === "function") gtag("event", "contact_click", { platform: a.getAttribute("data-platform") || a.hostname, placement: d.getAttribute("data-dm") || "menu" });
       });
     });
     /* open upwards when the section would clip the menu (the hero hides overflow for its glow) */
