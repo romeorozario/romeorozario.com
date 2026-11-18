@@ -71,6 +71,7 @@ Pages load `/css/site.css?v=...` and `/js/site.js?v=...`. `_headers` tells brows
 - Each page has its own `<title>` (under 60 characters), meta description (150 to 160 characters), keywords, robots, canonical, Open Graph and Twitter tags, and structured data. Keep og:title, twitter:title, og:description and twitter:description matching the title and description.
 - Use the full name "Romeo Nicholas Rozario" in titles and "Romeo Rozario" in descriptions or body copy, so both forms are indexed. The homepage Person schema lists both (`alternateName`).
 - Target keywords: digital marketing specialist, content marketing, digital marketing, marketing specialist, SEO, GEO, AEO, SaaS marketing (home, portfolio, blogs); guitarist, musician, producer (music).
+- Music meta description opens with "Looking for the best guitarist of Bangladesh?" (a question, not a claim); keep it matched in og:description and twitter:description.
 - Music page guitar-lesson terms (guitar lessons, online guitar lesson, learn guitar online, guitar instructor in Dhaka, best guitar instructor) live in the title, description, keywords meta, image alt text, the Service and FAQPage JSON-LD, and the collapsed "Guitar lessons: quick answers" FAQ in the Beyond the band panel. Never use hidden text (display:none, off-screen, same-colour) for keywords: it breaks Google's spam policies and risks a site-wide penalty. Collapsed accordions are fine.
 - External links open in a new tab with `target="_blank" rel="noopener"`.
 
