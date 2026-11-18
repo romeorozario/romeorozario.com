@@ -146,15 +146,17 @@
       var next = document.createElement("span");
       next.textContent = words[idx];
       next.setAttribute("data-word", words[idx]);
-      next.style.cssText = "position:absolute;left:0;top:0;display:inline-block;white-space:nowrap";
+      /* animation:none stops the headline's entrance keyframes (.w > span) from replaying on the new word */
+      next.style.cssText = "position:absolute;left:0;top:0;display:inline-block;white-space:nowrap;animation:none;will-change:transform,opacity";
       mask.appendChild(next);
       var out = cur.animate([{ transform: "translate3d(0,0,0)", opacity: 1 }, { transform: "translate3d(0,-105%,0)", opacity: 0 }],
-                            { duration: 620, easing: EASE_OUT, fill: "forwards" });
+                            { duration: 420, easing: EASE_OUT, fill: "forwards" });
       var inn = next.animate([{ transform: "translate3d(0,105%,0) rotate(4deg)" }, { transform: "translate3d(0,0,0) rotate(0deg)" }],
-                             { duration: 820, delay: 90, easing: EASE_IN, fill: "both" });
+                             { duration: 560, delay: 40, easing: EASE_IN, fill: "both" });
       Promise.all([out.finished, inn.finished]).then(function () {
         if (cur.parentNode) cur.parentNode.removeChild(cur);
         next.style.position = "static";
+        next.style.willChange = "";
         inn.cancel();
         cur = next; busy = false; schedule();
       });
