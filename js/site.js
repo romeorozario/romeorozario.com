@@ -170,7 +170,7 @@
   /* ---------- Scroll reveal with automatic stagger ---------- */
   document.querySelectorAll("[data-stagger]").forEach(function (group) {
     var n = 0;
-    group.querySelectorAll("[data-reveal]").forEach(function (el) { el.style.setProperty("--i", Math.min(n++, 8)); });
+    group.querySelectorAll("[data-reveal]").forEach(function (el) { el.style.setProperty("--i", Math.min(n++, 6)); });
   });
   var revealEls = document.querySelectorAll("[data-reveal]");
   if ("IntersectionObserver" in window && !still()) {
@@ -178,7 +178,7 @@
       entries.forEach(function (en) {
         if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); }
       });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
+    }, { rootMargin: "0px 0px 12% 0px", threshold: 0 });
     revealEls.forEach(function (el) { io.observe(el); });
   } else {
     revealEls.forEach(function (el) { el.classList.add("is-in"); });
