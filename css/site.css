@@ -1254,6 +1254,14 @@ a.ccard:hover .cover img { transform: scale(1.05); }
   .intro { padding: 36px 0 28px; }
 }
 
+/* ---------- Justified photo gallery (Music "On stage"): every photo keeps its own shape ---------- */
+.justified { display: flex; flex-direction: column; gap: 12px; }
+.jrow { display: flex; gap: 12px; }
+.jrow figure { min-width: 0; margin: 0; overflow: hidden; border-radius: 20px; background: var(--surf); box-shadow: var(--card-shadow); }
+.jrow img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.jrow figure:hover img { transform: scale(1.03); }
+@media (max-width: 680px) { .justified, .jrow { gap: 8px; } .jrow figure { border-radius: 14px; } }
+
 /* ---------- Photo stack (Music hero): cards slide out from under the stack ---------- */
 .photo-stack { position: relative; aspect-ratio: 4 / 5; }
 .hero-photo .photo-stack img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; border-radius: 32px; backface-visibility: hidden; }
