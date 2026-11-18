@@ -583,6 +583,21 @@
     balanceWalls();
   }
 
+  /* ---------- DM menu (details[data-dm]): close on outside click, Esc, or after picking a link ---------- */
+  document.querySelectorAll("details[data-dm]").forEach(function (d) {
+    var sum = d.querySelector("summary");
+    document.addEventListener("click", function (e) { if (d.open && !d.contains(e.target)) d.open = false; });
+    d.addEventListener("keydown", function (e) { if (e.key === "Escape" && d.open) { d.open = false; sum.focus(); } });
+    d.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { d.open = false; }); });
+    /* open upwards when the section would clip the menu (the hero hides overflow for its glow) */
+    d.addEventListener("toggle", function () {
+      d.classList.remove("dm-up");
+      if (!d.open) return;
+      var pop = d.querySelector(".dm-pop"), clip = d.closest(".hero, section") || document.body;
+      if (pop.getBoundingClientRect().bottom > clip.getBoundingClientRect().bottom - 8) d.classList.add("dm-up");
+    });
+  });
+
   /* ---------- Footer year ---------- */
   document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();

@@ -868,6 +868,28 @@ a.ccard:hover .cover img { transform: scale(1.05); }
 .mhero .hero-photo::before { background: var(--cobalt); }
 .mhero h1 { font-size: clamp(50px, 7vw, 88px); line-height: 0.95; }
 
+/* Music hero: "Learn guitar with me" opens a small DM menu (details/summary, closes on outside click and Esc) */
+.mhero .hero-copy { position: relative; z-index: 3; }
+.dm-menu { position: relative; }
+.dm-menu > summary { list-style: none; cursor: pointer; user-select: none; }
+.dm-menu > summary::-webkit-details-marker { display: none; }
+.dm-menu > summary svg { transition: transform 0.35s var(--ease); }
+.dm-menu[open] > summary svg { transform: rotate(90deg); }
+.dm-pop { position: absolute; left: 0; top: calc(100% + 10px); z-index: 30; min-width: 270px; padding: 8px; display: flex; flex-direction: column; gap: 2px; border-radius: 18px; background: var(--surf); border: 1px solid var(--line); box-shadow: 0 22px 48px -18px rgba(10, 16, 40, 0.38); animation: dm-in 0.26s var(--ease) both; }
+.dm-title { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 8px 10px 6px; }
+.dm-pop a { display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 12px; color: var(--text); text-decoration: none; transition: background-color 0.25s ease; }
+.dm-pop a:hover, .dm-pop a:focus-visible { background: color-mix(in oklab, var(--orange) 12%, transparent); }
+.dm-pop .ci { flex: 0 0 36px; width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: var(--b); color: var(--f); }
+.dm-pop .ci svg { width: 18px; height: 18px; fill: currentColor; }
+.dm-pop .ct { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.dm-pop .ct b { font-size: 14.5px; font-weight: 600; }
+.dm-pop .ct span { font-size: 12.5px; color: var(--muted); }
+.dm-menu.dm-up .dm-pop { top: auto; bottom: calc(100% + 10px); }
+.dm-menu.dm-up[open] > summary svg { transform: rotate(-90deg); }
+@keyframes dm-in { from { opacity: 0; transform: translateY(-6px) scale(0.98); } }
+/* Music: short bio under "Bands", written as a quotable third-person summary */
+.mbio { max-width: 860px; margin: 18px 0 28px; display: flex; flex-direction: column; gap: 8px; }
+.mbio p:last-child { font-size: 16.5px; line-height: 1.65; color: var(--muted); }
 .band-feature { display: grid; grid-template-columns: 1.3fr 1fr; border-radius: 28px; overflow: hidden; background: var(--surf); border: 1px solid var(--line); box-shadow: var(--card-shadow); }
 .band-feature .photo { overflow: hidden; min-height: 480px; }
 .band-feature .photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s var(--ease); }
@@ -1233,6 +1255,8 @@ a.ccard:hover .cover img { transform: scale(1.05); }
   /* hero buttons: same width, stacked, so the pair looks deliberate */
   .hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; padding-top: 2px; }
   .hero-ctas .btn { width: 100%; min-height: 50px; font-size: 15px; }
+  .hero-ctas .dm-menu { width: 100%; }
+  .dm-pop { right: 0; min-width: 0; }
   /* small labels stay on one line */
   .chip { font-size: 10.5px; letter-spacing: 0.08em; padding: 7px 12px; gap: 8px; }
   /* Portfolio intro on phones: name first, then a smaller photo, then the role label */
@@ -1311,6 +1335,7 @@ a.ccard:hover .cover img { transform: scale(1.05); }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
+  .dm-pop { animation: none; }
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; transition-delay: 0s !important; scroll-behavior: auto !important; }
   .js [data-reveal] { opacity: 1; translate: none; scale: none; }
   .js .hero h1:not(.is-split) { opacity: 1; }
