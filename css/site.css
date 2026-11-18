@@ -508,8 +508,14 @@ button { font: inherit; color: inherit; }
 .contact-panel > *:not(.glow) { position: relative; }
 .contact-panel .h2 { font-size: clamp(36px, 5vw, 60px); max-width: 780px; }
 .contact-panel > p { font-size: 18px; color: var(--hero-mut); }
-.contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(max(240px, (100% - 24px) / 3), 1fr)); gap: 12px; }
 .contact-grid li:first-child { grid-column: 1 / -1; }
+/* two columns (under 744px wide): an odd last card spans the row instead of sitting alone */
+.contact-panel { container-type: inline-size; }
+@container (max-width: 743.98px) {
+  .contact-grid li:last-child:nth-child(even) { grid-column: 1 / -1; }
+  .contact-grid li:last-child:nth-child(even) a { flex-direction: row; align-items: center; }
+}
 .contact-grid a {
   display: flex; flex-direction: column; gap: 2px; min-height: 44px; padding: 16px 18px; border-radius: 14px; background: var(--contact-card); border: 1px solid var(--line);
   color: var(--hero-fg); text-decoration: none; transition: transform 0.5s var(--ease), border-color 0.3s ease;
