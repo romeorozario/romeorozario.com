@@ -1244,6 +1244,16 @@ a.ccard:hover .cover img { transform: scale(1.05); }
   .stats dt { font-size: 13px; }
 }
 
+/* ---------- Desktop: tighter vertical rhythm on inner pages ---------- */
+@media (min-width: 1061px) {
+  .sec { padding: 60px 0; }
+  .sec > .wrap { gap: 26px; }
+  .pf { padding: 60px 0; }
+  .pf > .wrap { gap: 30px; }
+  .cta-wrap { padding: 0 0 72px; }
+  .intro { padding: 36px 0 28px; }
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; transition-delay: 0s !important; scroll-behavior: auto !important; }
