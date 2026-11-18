@@ -24,13 +24,16 @@ Every page shares the same header, footer, `<head>` setup (theme script, Google 
 
 ## Shared files
 
-Pages load `/css/site.css?v=...` and `/js/site.js?v=...`. Cloudflare lets browsers cache these for 4 hours, so bump the `v=` value in all five pages whenever you change either file, or returning visitors keep seeing the old version.
+Pages load `/css/site.css?v=...` and `/js/site.js?v=...`. `_headers` tells browsers to cache CSS and JS for a year, so bump the `v=` value in all five pages whenever you change either file, or visitors keep seeing the old version. Images and videos cache for a day and then refresh in the background (stale-while-revalidate, 30 days); if you replace an image in place, visitors may see the old one once before it updates, so give significantly changed images a new filename.
 
 
 - `css/site.css`: design tokens at the top (`:root` for light, `[data-theme="dark"]` for dark), then home sections, then inner-page sections, then responsive rules (breakpoints 1180px, 1060px, 680px) and reduced-motion rules.
 - `js/site.js`: theme toggle (circular reveal), hide-on-scroll header, mobile menu, headline word split (`data-split`), scroll reveals, count-up stats (`data-count`), magnetic buttons (`data-magnetic`), lightbox (`img[data-zoom]`), post slider (`data-slider`), blog pager (`data-pager`), jump-nav scrollspy (`data-jump`), YouTube and Spotify click-to-play (`data-yt`, `data-spotify`), autoplay-in-view videos (`video[data-autoplay]`).
 
 ## Conventions
+
+- Home hero on desktop scales with screen height ("Desktop: hero and stats fit the first screen" block in `css/site.css`) so the stats strip is visible on load from 1366x650 up. Keep it that way when editing the hero.
+- Images: keep files lean. Blog covers max 800px wide, YouTube thumbnails 960px, anything zoomable max 1600px; WebP quality around 80.
 
 - Desktop scale: above 1060px the whole site renders at `zoom: 0.9` (top of `css/site.css`), the same as 90% browser zoom. Any JS that turns a measured rect into a CSS length must divide by `Z()` in `js/site.js` (window scrolling does not need it).
 - Phones (680px and below): two cards per row wherever a card fits (Start here, What I do, Experience, blogs, contact, portfolio blog cards, emails, bento grids, blog pager, bands, YouTube, Spotify, education). One per row only for wide content. An odd last bento tile spans the row. The phone rules sit in the "Phones: denser layout" block near the end of `css/site.css`.
