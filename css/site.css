@@ -1279,6 +1279,20 @@ a.ccard:hover .cover img { transform: scale(1.05); }
   .jrow figure.span-all { column-span: all; margin-top: 0; }
 }
 
+/* Gallery pager: two-row pages that swipe sideways, arrows top right */
+.gp-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.gp-nav { display: flex; align-items: center; gap: 10px; }
+.arrow-btn.inline { position: static; margin: 0; width: 48px; height: 48px; }
+.arrow-btn.inline[disabled] { opacity: 0.35; transform: none; pointer-events: none; }
+.gp-track {
+  display: flex; gap: 16px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+  scrollbar-width: none; align-items: flex-start; transition: height 0.5s var(--ease);
+}
+.gp-track::-webkit-scrollbar { display: none; }
+.gp-page { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; scroll-snap-stop: always; }
+@media (max-width: 680px) { .arrow-btn.inline { width: 42px; height: 42px; } .gp-track { gap: 10px; } }
+
+
 /* ---------- Photo stack (Music hero): cards slide out from under the stack ---------- */
 .photo-stack { position: relative; aspect-ratio: 4 / 5; }
 .hero-photo .photo-stack img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; border-radius: 32px; backface-visibility: hidden; }
