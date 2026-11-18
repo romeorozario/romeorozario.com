@@ -588,13 +588,24 @@
     var sum = d.querySelector("summary");
     document.addEventListener("click", function (e) { if (d.open && !d.contains(e.target)) d.open = false; });
     d.addEventListener("keydown", function (e) { if (e.key === "Escape" && d.open) { d.open = false; sum.focus(); } });
-    d.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { d.open = false; }); });
+    d.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function () {
+        d.open = false;
+        /* GA4: one event per DM click, so lesson and booking leads can be counted (mark "dm_click" as a key event in GA4) */
+        if (typeof gtag === "function") gtag("event", "dm_click", { platform: a.getAttribute("data-platform") || a.hostname, placement: d.getAttribute("data-dm") || "menu" });
+      });
+    });
     /* open upwards when the section would clip the menu (the hero hides overflow for its glow) */
     d.addEventListener("toggle", function () {
       d.classList.remove("dm-up");
       if (!d.open) return;
-      var pop = d.querySelector(".dm-pop"), clip = d.closest(".hero, section") || document.body;
-      if (pop.getBoundingClientRect().bottom > clip.getBoundingClientRect().bottom - 8) d.classList.add("dm-up");
+      /* limit = the nearest ancestor that clips overflow, or the bottom of the screen */
+      var pop = d.querySelector(".dm-pop"), limit = innerHeight, el = d.parentElement;
+      for (; el && el !== document.body; el = el.parentElement) {
+        if (getComputedStyle(el).overflowY !== "visible") { limit = Math.min(limit, el.getBoundingClientRect().bottom); break; }
+      }
+      var r = pop.getBoundingClientRect(), s = d.querySelector("summary").getBoundingClientRect();
+      if (r.bottom > limit - 8 && s.top - r.height - 18 > 0) d.classList.add("dm-up");
     });
   });
 
