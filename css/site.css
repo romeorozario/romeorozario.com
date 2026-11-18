@@ -1283,7 +1283,7 @@ a.ccard:hover .cover img { transform: scale(1.05); }
 .gpager { position: relative; }
 .gp-track {
   display: flex; gap: 16px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-behavior: smooth;
-  scrollbar-width: none; align-items: flex-start; transition: height 0.5s var(--ease);
+  scrollbar-width: none; align-items: flex-start;
 }
 .gp-track::-webkit-scrollbar { display: none; }
 .gp-page { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; scroll-snap-stop: always; }
